@@ -1,0 +1,15 @@
+<div class="tab-bar-wrapper">
+  <div class="tab-bar">
+    <button
+      *ngFor="let tab of tabs"
+      type="button"
+      class="tab"
+      [class.active]="tab.key === activeTab"
+      [class.disabled]="tab.disabled"
+      [disabled]="tab.disabled"
+      (click)="selectTab(tab)"
+    >
+      {{ tab.label }}
+    </button>
+  </div>
+</div>
