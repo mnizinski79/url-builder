@@ -1,0 +1,43 @@
+<div class="drawer-overlay" *ngIf="open" (click)="close()">
+  <aside class="drawer" (click)="$event.stopPropagation()">
+    <div class="drawer-header">
+      <div class="drawer-tabs">
+        <button
+          type="button"
+          class="drawer-tab"
+          [class.active]="activeTab === 'saved'"
+          (click)="activeTab = 'saved'"
+        >Saved</button>
+        <button
+          type="button"
+          class="drawer-tab"
+          [class.active]="activeTab === 'history'"
+          (click)="activeTab = 'history'"
+        >History</button>
+      </div>
+      <button type="button" class="drawer-close" (click)="close()">✕</button>
+    </div>
+
+    <div class="drawer-content">
+      <ng-container *ngIf="activeTab === 'saved'">
+        <div *ngIf="savedUrls.length === 0" class="empty-state">No saved URLs yet.</div>
+        <app-saved-url-card
+          *ngFor="let entry of savedUrls"
+          [entry]="entry"
+          (copyUrl)="close()"
+          (deleteEntry)="deleteSaved($event)"
+        ></app-saved-url-card>
+      </ng-container>
+
+      <ng-container *ngIf="activeTab === 'history'">
+        <div *ngIf="history.length === 0" class="empty-state">No history yet.</div>
+        <app-saved-url-card
+          *ngFor="let entry of history"
+          [entry]="entry"
+          (copyUrl)="close()"
+          (deleteEntry)="deleteHistory($event)"
+        ></app-saved-url-card>
+      </ng-container>
+    </div>
+  </aside>
+</div>
