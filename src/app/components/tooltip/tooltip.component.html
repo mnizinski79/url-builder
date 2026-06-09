@@ -1,0 +1,8 @@
+<span class="tooltip-wrapper"
+      (mouseenter)="onMouseEnter()"
+      (mouseleave)="onMouseLeave()">
+  <button type="button" class="tooltip-trigger" aria-label="More information">?</button>
+  <span class="tooltip-bubble" [class.visible]="visible" role="tooltip">
+    {{ text }}
+  </span>
+</span>
