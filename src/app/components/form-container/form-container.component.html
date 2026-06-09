@@ -1,0 +1,178 @@
+<div class="form-container">
+  <!-- Core Environment Setup -->
+  <app-collapsible-section title="Core Environment Setup" subtitle="Brand, language, and tracking basics" [expanded]="true">
+    <div class="form-grid">
+      <app-select-field
+        label="Brand"
+        [groups]="brandGroups"
+        [control]="c['brandCode']"
+        tooltip="The IHG brand to target. Each brand has a unique code used to filter content and rates."
+      ></app-select-field>
+      <app-select-field
+        label="Language"
+        [options]="languageOptions"
+        [control]="c['language']"
+        tooltip="Locale determines the language and regional content served on the page."
+      ></app-select-field>
+      <app-text-field
+        label="PMID"
+        placeholder="e.g. GGLB"
+        [control]="c['pmid']"
+        tooltip="Paid Media ID — 4-character code identifying the campaign traffic source."
+      ></app-text-field>
+      <app-text-field
+        label="Global Attribution (GLAT)"
+        placeholder="e.g. MCEN"
+        [control]="c['glat']"
+        tooltip="Global attribution tracking code, minimum 4 characters. Used for cross-channel attribution."
+      ></app-text-field>
+      <app-text-field
+        label="Rate Code"
+        placeholder="e.g. 6CBARC"
+        [control]="c['rateCode']"
+        tooltip="Specific rate plan code to pre-select on the landing page."
+      ></app-text-field>
+      <app-toggle-field
+        label="Domain Persistence"
+        description="Allow tracking cookies across IHG domains"
+        [control]="c['domainPersistence']"
+        tooltip="Allows tracking cookies to persist across IHG domains for consistent attribution."
+      ></app-toggle-field>
+      <app-toggle-field
+        label="China Domain"
+        description="Route traffic through China-specific domain"
+        [control]="c['chinaDomain']"
+        tooltip="Routes traffic through IHG's China-specific domain for GC market campaigns."
+      ></app-toggle-field>
+    </div>
+  </app-collapsible-section>
+
+  <!-- Search-only sections -->
+  <ng-container *ngIf="isSearch">
+    <!-- Itinerary Details -->
+    <app-collapsible-section title="Itinerary Details" subtitle="Destination, dates, and room count" [expanded]="true">
+      <div class="form-grid">
+        <app-text-field
+          label="Destination"
+          placeholder="e.g. Atlanta"
+          [control]="c['qDest']"
+          tooltip="City or region name to pre-populate in the hotel search field."
+        ></app-text-field>
+        <app-text-field
+          label="City"
+          placeholder="e.g. ATL"
+          [control]="c['qCity']"
+          tooltip="Specific city code used to narrow hotel search results."
+        ></app-text-field>
+        <app-select-field
+          label="Country"
+          [options]="countryOptions"
+          [control]="c['qCtry']"
+          tooltip="Country filter applied to hotel search results."
+        ></app-select-field>
+        <app-date-range-field
+          label="Eligible Stay Dates"
+          [checkInControl]="c['qChkIn']"
+          [checkOutControl]="c['qChkOut']"
+          tooltip="Check-in and check-out dates passed to the search (YYYY-MM-DD format)."
+        ></app-date-range-field>
+        <app-number-spinner-field
+          label="Rooms"
+          [control]="c['qRms']"
+          [min]="1"
+          [max]="9"
+          tooltip="Number of rooms required. Minimum value: 1."
+        ></app-number-spinner-field>
+        <app-select-field
+          label="Special Rate"
+          [options]="specialRateOptions"
+          [control]="c['qRateCode']"
+          tooltip="Pre-selects a special rate category (e.g. AAA, Senior, Government) in search results."
+        ></app-select-field>
+      </div>
+    </app-collapsible-section>
+
+    <!-- Rate Details -->
+    <app-collapsible-section title="Rate Details" subtitle="Corporate and promotional rates">
+      <div class="form-grid">
+        <app-text-field
+          label="Corporate Account Number"
+          placeholder="e.g. IHG123456"
+          [control]="c['corpNum']"
+          tooltip="Corporate account number used to surface negotiated rates."
+        ></app-text-field>
+        <app-text-field
+          label="Promo Code"
+          placeholder="e.g. SUMMER25"
+          [control]="c['promoCode']"
+          tooltip="Promotional code that applies a discount or special rate to results."
+        ></app-text-field>
+      </div>
+    </app-collapsible-section>
+
+    <!-- Sort & Filter -->
+    <app-collapsible-section title="Sort & Filter" subtitle="Control result ordering and hotel class">
+      <div class="form-grid">
+        <app-select-field
+          label="Sort By"
+          [options]="sortOptions"
+          [control]="c['qSort']"
+          tooltip="Sets the default sort order for search results: Relevance, Price Low–High, Guest Rating."
+        ></app-select-field>
+        <app-select-field
+          label="Hotel Class"
+          [options]="hotelClassOptions"
+          [control]="c['qRating']"
+          tooltip="Filters search results by star rating (1–5 stars)."
+        ></app-select-field>
+      </div>
+    </app-collapsible-section>
+
+    <!-- Tracking -->
+    <app-collapsible-section title="Tracking" subtitle="UTM parameters for analytics">
+      <div class="form-grid">
+        <app-text-field
+          label="Campaign ID"
+          placeholder="e.g. summer_sale_2026"
+          [control]="c['utmCampaign']"
+          tooltip="UTM campaign name for analytics — identifies the specific marketing campaign."
+        ></app-text-field>
+        <app-text-field
+          label="Source"
+          placeholder="e.g. newsletter"
+          [control]="c['utmSource']"
+          tooltip="UTM source — identifies where traffic originates (e.g. newsletter, google)."
+        ></app-text-field>
+        <app-text-field
+          label="Medium"
+          placeholder="e.g. email"
+          [control]="c['utmMedium']"
+          tooltip="UTM medium — the marketing channel type (e.g. email, cpc, social)."
+        ></app-text-field>
+      </div>
+    </app-collapsible-section>
+
+    <!-- Deep Linking -->
+    <app-collapsible-section title="Deep Linking" subtitle="Channel-specific routing">
+      <div class="form-grid">
+        <app-text-field
+          label="Deep Link Path"
+          placeholder="e.g. /hotel/details"
+          [control]="c['deepLink']"
+          tooltip="Internal app path used for channel-specific deep link routing."
+        ></app-text-field>
+        <app-select-field
+          label="Channel"
+          [options]="channelOptions"
+          [control]="c['channel']"
+          tooltip="Specifies the marketing channel for deep link attribution (e.g. email, push, sms)."
+        ></app-select-field>
+      </div>
+    </app-collapsible-section>
+  </ng-container>
+
+  <!-- Actions -->
+  <div class="form-actions">
+    <button type="button" class="btn-secondary" (click)="reset()">Clear Form</button>
+  </div>
+</div>
