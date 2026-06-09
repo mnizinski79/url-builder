@@ -1,10 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { PhIconComponent } from '../ph-icon/ph-icon.component';
 
 @Component({
   selector: 'app-collapsible-section',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, PhIconComponent],
   templateUrl: './collapsible-section.component.html',
   styleUrls: ['./collapsible-section.component.css'],
 })

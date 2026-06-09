@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 import { SavedUrl } from '../../models/url-builder.models';
 import { StorageService } from '../../services/storage.service';
 import { SavedUrlCardComponent } from '../saved-url-card/saved-url-card.component';
+import { PhIconComponent } from '../ph-icon/ph-icon.component';
 
 type DrawerTab = 'saved' | 'history';
 
 @Component({
   selector: 'app-drawer',
   standalone: true,
-  imports: [CommonModule, SavedUrlCardComponent],
+  imports: [CommonModule, SavedUrlCardComponent, PhIconComponent],
   templateUrl: './drawer.component.html',
   styleUrls: ['./drawer.component.css'],
 })

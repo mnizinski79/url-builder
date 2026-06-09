@@ -1,10 +1,11 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { PhIconComponent } from '../ph-icon/ph-icon.component';
 
 @Component({
   selector: 'app-url-bar',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, PhIconComponent],
   templateUrl: './url-bar.component.html',
   styleUrls: ['./url-bar.component.css'],
 })

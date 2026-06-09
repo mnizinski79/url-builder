@@ -2,7 +2,7 @@
   <div class="modal" (click)="$event.stopPropagation()">
     <div class="modal-header">
       <h2 class="modal-title">Save URL</h2>
-      <button type="button" class="modal-close" (click)="cancel()">✕</button>
+      <button type="button" class="modal-close" (click)="cancel()" aria-label="Close"><ph-icon name="x" [size]="18"></ph-icon></button>
     </div>
     <div class="modal-body">
       <div class="url-preview">{{ url }}</div>

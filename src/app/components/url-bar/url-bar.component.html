@@ -7,17 +7,17 @@
   </div>
   <div class="url-actions">
     <button type="button" class="url-action-btn" (click)="copy()" [class.copied]="copied" [attr.aria-label]="copied ? 'Copied!' : 'Copy URL'">
-      <span *ngIf="!copied">&#128203;</span>
-      <span *ngIf="copied" class="copied-label">✓</span>
+      <ph-icon *ngIf="!copied" name="copy" [size]="16"></ph-icon>
+      <ph-icon *ngIf="copied" name="check" [size]="16"></ph-icon>
     </button>
     <div class="popover-container">
       <button type="button" class="url-action-btn" (click)="togglePopover()" aria-label="More options">
-        &#8226;&#8226;&#8226;
+        <ph-icon name="dots-three" [size]="20"></ph-icon>
       </button>
       <div class="popover" *ngIf="showPopover">
         <div class="popover-header">
           <span>Full URL</span>
-          <button type="button" class="popover-close" (click)="closePopover()">✕</button>
+          <button type="button" class="popover-close" (click)="closePopover()" aria-label="Close"><ph-icon name="x" [size]="16"></ph-icon></button>
         </div>
         <textarea class="popover-url" readonly>{{ fullUrlValue }}</textarea>
       </div>

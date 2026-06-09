@@ -6,8 +6,8 @@
   </div>
   <div class="card-actions">
     <button type="button" class="card-btn" [class.copied]="copied" (click)="copy()" [attr.aria-label]="copied ? 'Copied' : 'Copy URL'">
-      {{ copied ? '✓' : '⧉' }}
+      <ph-icon [name]="copied ? 'check' : 'copy'" [size]="14"></ph-icon>
     </button>
-    <button type="button" class="card-btn delete" (click)="delete()" aria-label="Delete">✕</button>
+    <button type="button" class="card-btn delete" (click)="delete()" aria-label="Delete"><ph-icon name="x" [size]="14"></ph-icon></button>
   </div>
 </div>

@@ -2,12 +2,13 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { TooltipComponent } from '../../tooltip/tooltip.component';
+import { PhIconComponent } from '../../ph-icon/ph-icon.component';
 import { SelectOption, SelectGroup } from '../../../models/url-builder.models';
 
 @Component({
   selector: 'app-select-field',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, TooltipComponent],
+  imports: [CommonModule, ReactiveFormsModule, TooltipComponent, PhIconComponent],
   templateUrl: './select-field.component.html',
   styleUrls: ['./select-field.component.css'],
 })

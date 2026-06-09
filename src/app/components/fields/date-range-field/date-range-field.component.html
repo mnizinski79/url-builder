@@ -6,7 +6,7 @@
     <app-tooltip *ngIf="tooltip" [text]="tooltip"></app-tooltip>
   </div>
   <div class="date-range-wrapper">
-    <span class="date-icon">&#128197;</span>
+    <ph-icon name="calendar-blank" [size]="16" class="date-icon"></ph-icon>
     <input type="date" class="date-input" [formControl]="checkInControl" />
     <span class="date-arrow">→</span>
     <input type="date" class="date-input" [formControl]="checkOutControl" />

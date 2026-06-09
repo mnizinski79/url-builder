@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -27,7 +27,7 @@ import { NumberSpinnerFieldComponent } from '../fields/number-spinner-field/numb
   templateUrl: './form-container.component.html',
   styleUrls: ['./form-container.component.css'],
 })
-export class FormContainerComponent implements OnInit, OnDestroy {
+export class FormContainerComponent implements OnChanges, OnDestroy {
   @Input() activeTab: TabKey = 'home';
   @Output() formChanged = new EventEmitter<void>();
 
@@ -44,9 +44,11 @@ export class FormContainerComponent implements OnInit, OnDestroy {
 
   constructor(private formState: FormStateService) {}
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
+    this.sub?.unsubscribe();
     this.form = this.formState.getForm(this.activeTab);
     this.sub = this.form.valueChanges.subscribe(() => this.formChanged.emit());
+    this.formChanged.emit();
   }
 
   ngOnDestroy(): void {

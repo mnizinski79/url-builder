@@ -6,11 +6,11 @@
     <app-tooltip *ngIf="tooltip" [text]="tooltip"></app-tooltip>
   </div>
   <div class="spinner-wrapper">
-    <span class="spinner-icon">{{ icon }}</span>
+    <ph-icon name="bed" [size]="18" class="spinner-icon"></ph-icon>
     <span class="spinner-value">{{ control.value }}</span>
     <div class="spinner-buttons">
-      <button type="button" class="spinner-btn" (click)="increment()" [disabled]="control.value >= max">▲</button>
-      <button type="button" class="spinner-btn" (click)="decrement()" [disabled]="control.value <= min">▼</button>
+      <button type="button" class="spinner-btn" (click)="increment()" [disabled]="control.value >= max" aria-label="Increase"><ph-icon name="caret-up" [size]="12"></ph-icon></button>
+      <button type="button" class="spinner-btn" (click)="decrement()" [disabled]="control.value <= min" aria-label="Decrease"><ph-icon name="caret-down" [size]="12"></ph-icon></button>
     </div>
   </div>
 </div>

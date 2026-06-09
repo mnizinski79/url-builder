@@ -1,11 +1,12 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SavedUrl } from '../../models/url-builder.models';
+import { PhIconComponent } from '../ph-icon/ph-icon.component';
 
 @Component({
   selector: 'app-saved-url-card',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, PhIconComponent],
   templateUrl: './saved-url-card.component.html',
   styleUrls: ['./saved-url-card.component.css'],
 })
