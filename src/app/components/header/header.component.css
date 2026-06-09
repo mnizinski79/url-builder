@@ -1,0 +1,61 @@
+.header {
+  background: var(--color-navy);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  height: 80px;
+  flex-shrink: 0;
+}
+
+.header-left { display: flex; align-items: center; }
+
+.logo-area { display: flex; align-items: center; gap: 16px; }
+
+.ihg-logo { display: flex; align-items: center; gap: 6px; }
+
+.logo-text {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--color-text-on-dark);
+  letter-spacing: -1px;
+}
+
+.logo-sub {
+  font-size: 7px;
+  font-weight: 600;
+  color: var(--color-text-on-dark-muted);
+  line-height: 1.3;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.header-divider {
+  width: 1px;
+  height: 28px;
+  background: rgba(255,255,255,0.25);
+  margin: 0 4px;
+}
+
+.app-title { font-size: 20px; font-weight: 400; color: var(--color-text-on-dark); }
+
+.header-nav { display: flex; align-items: center; gap: 4px; }
+
+.nav-btn {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  color: var(--color-text-on-dark);
+  background: transparent;
+  transition: background var(--transition-base);
+  border: none;
+  cursor: pointer;
+}
+
+.nav-btn:hover { background: rgba(255,255,255,0.12); }
+
+@media (max-width: 768px) {
+  .header { padding: 0 16px; }
+  .app-title { display: none; }
+  .nav-btn { padding: 6px 8px; font-size: 12px; }
+}
