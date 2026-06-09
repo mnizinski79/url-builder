@@ -1,0 +1,16 @@
+<div class="field">
+  <div class="field-label-row">
+    <label class="field-label">
+      {{ label }}<span *ngIf="required" class="required"> *</span>
+    </label>
+    <app-tooltip *ngIf="tooltip" [text]="tooltip"></app-tooltip>
+  </div>
+  <div class="spinner-wrapper">
+    <span class="spinner-icon">{{ icon }}</span>
+    <span class="spinner-value">{{ control.value }}</span>
+    <div class="spinner-buttons">
+      <button type="button" class="spinner-btn" (click)="increment()" [disabled]="control.value >= max">▲</button>
+      <button type="button" class="spinner-btn" (click)="decrement()" [disabled]="control.value <= min">▼</button>
+    </div>
+  </div>
+</div>
