@@ -1,0 +1,119 @@
+:host {
+  display: block;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--color-navy);
+  padding: 20px 32px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.url-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+.url-content-area {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.url-display {
+  display: flex;
+  align-items: baseline;
+  white-space: nowrap;
+  font-size: 13px;
+  font-family: 'Menlo', 'Consolas', monospace;
+  overflow: hidden;
+}
+
+.url-base { color: var(--color-text-on-dark); flex-shrink: 0; }
+.url-query { color: var(--color-text-on-dark-muted); }
+
+.url-fade {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60px;
+  height: 100%;
+  background: linear-gradient(to right, transparent, var(--color-navy));
+  pointer-events: none;
+}
+
+.url-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.url-action-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-on-dark-muted);
+  font-size: 14px;
+  transition: background var(--transition-base), color var(--transition-base);
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+
+.url-action-btn:hover { background: rgba(255,255,255,0.12); color: white; }
+.url-action-btn.copied { color: #4ade80; }
+.copied-label { font-size: 14px; }
+
+.popover-container { position: relative; }
+
+.popover {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: white;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  width: 420px;
+  z-index: 200;
+}
+
+.popover-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.popover-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-muted);
+  font-size: 14px;
+}
+
+.popover-url {
+  width: 100%;
+  padding: 10px 14px;
+  font-family: monospace;
+  font-size: 12px;
+  color: var(--color-text-primary);
+  border: none;
+  resize: none;
+  min-height: 80px;
+  outline: none;
+  word-break: break-all;
+}

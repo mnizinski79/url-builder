@@ -1,0 +1,26 @@
+<div class="url-bar">
+  <div class="url-content-area">
+    <div class="url-display">
+      <span class="url-base">{{ baseUrl }}</span><span class="url-query">{{ queryString }}</span>
+    </div>
+    <div class="url-fade"></div>
+  </div>
+  <div class="url-actions">
+    <button type="button" class="url-action-btn" (click)="copy()" [class.copied]="copied" [attr.aria-label]="copied ? 'Copied!' : 'Copy URL'">
+      <span *ngIf="!copied">&#128203;</span>
+      <span *ngIf="copied" class="copied-label">✓</span>
+    </button>
+    <div class="popover-container">
+      <button type="button" class="url-action-btn" (click)="togglePopover()" aria-label="More options">
+        &#8226;&#8226;&#8226;
+      </button>
+      <div class="popover" *ngIf="showPopover">
+        <div class="popover-header">
+          <span>Full URL</span>
+          <button type="button" class="popover-close" (click)="closePopover()">✕</button>
+        </div>
+        <textarea class="popover-url" readonly>{{ fullUrlValue }}</textarea>
+      </div>
+    </div>
+  </div>
+</div>
