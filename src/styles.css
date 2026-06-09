@@ -48,3 +48,12 @@ input, select {
   font-family: var(--font-stack);
   font-size: 14px;
 }
+
+/* Responsive utilities */
+@media (max-width: 1024px) {
+  /* form grid handled per-component */
+}
+
+@media (max-width: 768px) {
+  body { font-size: 14px; }
+}
