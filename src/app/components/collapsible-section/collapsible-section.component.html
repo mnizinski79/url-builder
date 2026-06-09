@@ -1,0 +1,13 @@
+<div class="section" [class.expanded]="expanded">
+  <button type="button" class="section-header" (click)="toggle()" [attr.aria-expanded]="expanded">
+    <div class="section-titles">
+      <span class="section-title">{{ title }}</span>
+      <span class="section-subtitle">{{ subtitle }}</span>
+    </div>
+    <span class="section-chevron" [class.rotated]="expanded">&#8964;</span>
+  </button>
+  <div class="section-divider"></div>
+  <div class="section-content" [class.open]="expanded">
+    <ng-content></ng-content>
+  </div>
+</div>
