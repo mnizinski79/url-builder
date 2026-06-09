@@ -1,0 +1,27 @@
+<div class="modal-backdrop" (click)="cancel()">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2 class="modal-title">Save URL</h2>
+      <button type="button" class="modal-close" (click)="cancel()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="url-preview">{{ url }}</div>
+      <div class="name-field">
+        <label class="name-label">Name <span class="optional">(optional)</span></label>
+        <input
+          type="text"
+          class="name-input"
+          [(ngModel)]="nameValue"
+          placeholder="e.g. Summer Campaign — US English"
+          maxlength="80"
+          autofocus
+        />
+        <span class="name-hint">Leave blank to use timestamp as name.</span>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn-cancel" (click)="cancel()">Cancel</button>
+      <button type="button" class="btn-save" (click)="save()">Save URL</button>
+    </div>
+  </div>
+</div>
