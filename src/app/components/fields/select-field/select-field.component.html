@@ -1,0 +1,22 @@
+<div class="field">
+  <div class="field-label-row">
+    <label class="field-label">
+      {{ label }}<span *ngIf="required" class="required"> *</span>
+    </label>
+    <app-tooltip *ngIf="tooltip" [text]="tooltip"></app-tooltip>
+  </div>
+  <div class="select-wrapper">
+    <select class="field-select" [formControl]="control">
+      <option value="">{{ placeholder }}</option>
+      <ng-container *ngIf="groups.length > 0; else flatOptions">
+        <optgroup *ngFor="let group of groups" [label]="group.groupLabel">
+          <option *ngFor="let opt of group.options" [value]="opt.value">{{ opt.label }}</option>
+        </optgroup>
+      </ng-container>
+      <ng-template #flatOptions>
+        <option *ngFor="let opt of options" [value]="opt.value">{{ opt.label }}</option>
+      </ng-template>
+    </select>
+    <span class="chevron">&#8964;</span>
+  </div>
+</div>
