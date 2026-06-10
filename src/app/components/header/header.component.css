@@ -30,21 +30,22 @@
 .header-nav { display: flex; align-items: center; gap: 8px; }
 
 .nav-btn {
-  padding: 6px 14px;
-  border-radius: 6px;
+  padding: 8px 12px;
+  border-radius: 8px;
   font-size: 13px;
   font-weight: 500;
   color: var(--color-text-on-dark);
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: #2b586e;
+  border: 1px solid #30627b;
   cursor: pointer;
   transition: background var(--transition-base), border-color var(--transition-base);
-  line-height: 1.4;
+  line-height: normal;
+  white-space: nowrap;
 }
 
 .nav-btn:hover {
-  background: rgba(255,255,255,0.1);
-  border-color: rgba(255, 255, 255, 0.55);
+  background: #336880;
+  border-color: #3a738e;
 }
 
 @media (max-width: 768px) {
