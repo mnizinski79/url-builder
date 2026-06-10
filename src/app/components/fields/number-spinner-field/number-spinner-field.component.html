@@ -6,11 +6,26 @@
     <app-tooltip *ngIf="tooltip" [text]="tooltip"></app-tooltip>
   </div>
   <div class="spinner-wrapper">
-    <ph-icon name="bed" [size]="18" class="spinner-icon"></ph-icon>
-    <span class="spinner-value">{{ control.value }}</span>
+    <div class="spinner-icon-box">
+      <ph-icon name="bed" [size]="20"></ph-icon>
+    </div>
+    <input
+      type="number"
+      class="spinner-input"
+      [formControl]="control"
+      (blur)="onBlur()"
+      [attr.min]="min"
+      [attr.max]="max"
+      inputmode="numeric"
+      [attr.aria-label]="label"
+    />
     <div class="spinner-buttons">
-      <button type="button" class="spinner-btn" (click)="increment()" [disabled]="control.value >= max" aria-label="Increase"><ph-icon name="caret-up" [size]="12"></ph-icon></button>
-      <button type="button" class="spinner-btn" (click)="decrement()" [disabled]="control.value <= min" aria-label="Decrease"><ph-icon name="caret-down" [size]="12"></ph-icon></button>
+      <button type="button" class="spinner-btn" (click)="increment()" [disabled]="current >= max" aria-label="Increase">
+        <ph-icon name="caret-up" [size]="12"></ph-icon>
+      </button>
+      <button type="button" class="spinner-btn" (click)="decrement()" [disabled]="current <= min" aria-label="Decrease">
+        <ph-icon name="caret-down" [size]="12"></ph-icon>
+      </button>
     </div>
   </div>
 </div>
