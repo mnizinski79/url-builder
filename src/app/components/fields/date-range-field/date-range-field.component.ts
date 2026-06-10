@@ -51,8 +51,12 @@ export class DateRangeFieldComponent {
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent): void {
-    if (this.isOpen && !this.el.nativeElement.contains(event.target as Node)) {
-      this.isOpen = false;
+    if (this.isOpen) {
+      const path = event.composedPath ? event.composedPath() : [];
+      const insideField = path.some(el => el === this.el.nativeElement);
+      if (!insideField) {
+        this.isOpen = false;
+      }
     }
   }
 

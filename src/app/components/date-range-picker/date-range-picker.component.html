@@ -1,4 +1,4 @@
-<div class="drp-panel" role="dialog" aria-label="Select date range" aria-modal="true">
+<div class="drp-panel" role="dialog" aria-label="Select date range" aria-modal="true" (click)="$event.stopPropagation()">
   <div class="drp-months">
     <app-month-grid
       [year]="leftYear"
