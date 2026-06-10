@@ -96,8 +96,10 @@ export class MonthGridComponent implements OnInit, OnChanges {
   private classifyCell(date: Date): DayCell {
     const isStart = this.isSameDay(date, this.startDate);
     const isEnd = this.isSameDay(date, this.endDate);
-    // Fix 2: removed !isEnd guard — CSS handles .end and .hover-end independently
-    const isHoverEnd = !this.confirmed && this.isSameDay(date, this.hoverDate);
+    // No !isEnd guard (hover-end may coincide with end), but the start cell
+    // keeps its start styling: hovering it restarts selection, it is never
+    // an end candidate.
+    const isHoverEnd = !this.confirmed && !isStart && this.isSameDay(date, this.hoverDate);
     const isInRange = !isStart && !isEnd && this.confirmed
       && this.between(date, this.startDate, this.endDate);
     // Fix 1: use toMidnight() for DST-safe comparison

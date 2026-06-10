@@ -69,6 +69,18 @@ describe('MonthGridComponent', () => {
     expect(cell.isHoverEnd).toBeTrue();
   });
 
+  it('should not mark the start cell as hover-end when hovering it', () => {
+    component.startDate = new Date(2026, 5, 9);
+    component.hoverDate = new Date(2026, 5, 9);
+    component.confirmed = false;
+    component.ngOnChanges();
+    const cell = component.dayCells.find(c => !c.isEmpty && c.date.getDate() === 9)!;
+    expect(cell.isStart).toBeTrue();
+    expect(cell.isHoverEnd)
+      .withContext('start cell must keep its start styling while hovered')
+      .toBeFalse();
+  });
+
   it('should compute nightsCount correctly', () => {
     component.startDate = new Date(2026, 5, 9);
     component.hoverDate = new Date(2026, 5, 18);
