@@ -1,13 +1,16 @@
 <div class="field">
   <div class="field-label-row">
-    <label class="field-label">
+    <label id="date-range-label" class="field-label">
       {{ label }}<span *ngIf="required" class="required"> *</span>
     </label>
     <app-tooltip *ngIf="tooltip" [text]="tooltip"></app-tooltip>
   </div>
 
   <div class="drp-trigger" (click)="togglePicker($event)" role="button" tabindex="0"
-       (keydown.enter)="togglePicker($event)" (keydown.space)="togglePicker($event)">
+       (keydown)="onTriggerKeydown($event)"
+       [attr.aria-expanded]="isOpen"
+       aria-haspopup="dialog"
+       aria-labelledby="date-range-label">
     <div class="drp-trigger-icon">
       <ph-icon name="calendar-blank" [size]="16"></ph-icon>
     </div>

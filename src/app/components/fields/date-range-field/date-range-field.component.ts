@@ -23,29 +23,38 @@ export class DateRangeFieldComponent {
 
   get parsedStart(): Date | null {
     const v = this.checkInControl?.value;
-    return v ? new Date(v + 'T00:00:00') : null;
+    if (!v) return null;
+    const d = new Date(v + 'T00:00:00');
+    return isNaN(d.getTime()) ? null : d;
   }
 
   get parsedEnd(): Date | null {
     const v = this.checkOutControl?.value;
-    return v ? new Date(v + 'T00:00:00') : null;
+    if (!v) return null;
+    const d = new Date(v + 'T00:00:00');
+    return isNaN(d.getTime()) ? null : d;
   }
 
   get displayText(): string {
-    const ci = this.checkInControl?.value;
-    const co = this.checkOutControl?.value;
-    if (!ci || !co) return '';
+    const start = this.parsedStart;
+    const end = this.parsedEnd;
+    if (!start || !end) return '';
     const opts: Intl.DateTimeFormatOptions = {
       weekday: 'short', month: 'short', day: 'numeric', year: 'numeric',
     };
-    const start = new Date(ci + 'T00:00:00');
-    const end = new Date(co + 'T00:00:00');
     return `${start.toLocaleDateString('en-US', opts)} → ${end.toLocaleDateString('en-US', opts)}`;
   }
 
   togglePicker(event: Event): void {
     event.stopPropagation();
     this.isOpen = !this.isOpen;
+  }
+
+  onTriggerKeydown(event: KeyboardEvent): void {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      this.togglePicker(event);
+    }
   }
 
   onApply(event: { start: Date; end: Date }): void {

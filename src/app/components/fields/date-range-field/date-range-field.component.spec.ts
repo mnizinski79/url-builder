@@ -56,6 +56,7 @@ describe('DateRangeFieldComponent', () => {
     const event = new MouseEvent('click');
     spyOn(event, 'stopPropagation');
     component.togglePicker(event);
+    expect(event.stopPropagation).toHaveBeenCalled();
     expect(component.isOpen).toBeTrue();
     component.togglePicker(event);
     expect(component.isOpen).toBeFalse();
