@@ -68,3 +68,37 @@
   font-size: 14px;
   color: var(--color-text-muted);
 }
+
+@media (max-width: 768px) {
+  .drawer-overlay {
+    justify-content: stretch;
+    align-items: flex-end;
+  }
+
+  .drawer {
+    width: 100%;
+    height: auto;
+    max-height: 85vh;
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.12);
+    animation: slideUp 200ms ease;
+    padding-top: 8px;
+  }
+
+  /* Grab-handle, consistent with the header menu sheet */
+  .drawer::before {
+    content: '';
+    display: block;
+    width: 36px;
+    height: 4px;
+    background: #d0d0d0;
+    border-radius: 2px;
+    margin: 0 auto 4px;
+    flex-shrink: 0;
+  }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
