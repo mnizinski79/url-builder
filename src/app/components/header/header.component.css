@@ -27,20 +27,25 @@
 
 .app-title { font-size: 20px; font-weight: 400; color: var(--color-text-on-dark); }
 
-.header-nav { display: flex; align-items: center; gap: 4px; }
+.header-nav { display: flex; align-items: center; gap: 8px; }
 
 .nav-btn {
-  padding: 6px 12px;
+  padding: 6px 14px;
   border-radius: 6px;
   font-size: 13px;
+  font-weight: 500;
   color: var(--color-text-on-dark);
   background: transparent;
-  transition: background var(--transition-base);
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.35);
   cursor: pointer;
+  transition: background var(--transition-base), border-color var(--transition-base);
+  line-height: 1.4;
 }
 
-.nav-btn:hover { background: rgba(255,255,255,0.12); }
+.nav-btn:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255, 255, 255, 0.55);
+}
 
 @media (max-width: 768px) {
   .header { padding: 0 16px; }

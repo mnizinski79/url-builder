@@ -4,15 +4,15 @@
     (openHistory)="openHistory()"
   ></app-header>
 
-  <app-url-bar
-    [fullUrl]="currentUrl"
-    (urlCopied)="onCopy()"
-  ></app-url-bar>
-
   <app-tab-bar
     [activeTab]="activeTab"
     (tabChange)="onTabChange($event)"
   ></app-tab-bar>
+
+  <app-url-bar
+    [fullUrl]="currentUrl"
+    (urlCopied)="onCopy()"
+  ></app-url-bar>
 
   <main class="main-scroll">
     <app-form-container
