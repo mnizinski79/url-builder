@@ -61,3 +61,17 @@
   opacity: 0.4;
   cursor: default;
 }
+
+@media (max-width: 768px) {
+  .drp-panel {
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 16px;
+    display: block;
+    width: 100%;
+  }
+  .drp-months {
+    justify-content: center;
+  }
+}

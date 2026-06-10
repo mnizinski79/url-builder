@@ -16,6 +16,7 @@ export type Phase = 'idle' | 'awaiting-end' | 'confirmed';
 export class DateRangePickerComponent implements OnInit {
   @Input() startDate: Date | null = null;
   @Input() endDate: Date | null = null;
+  @Input() singleMonth = false;
 
   @Output() apply = new EventEmitter<{ start: Date; end: Date }>();
   @Output() cancel = new EventEmitter<void>();

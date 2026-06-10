@@ -1,25 +1,42 @@
 <div class="drp-panel" role="dialog" aria-label="Select date range" aria-modal="true" (click)="$event.stopPropagation()">
   <div class="drp-months">
+    <ng-container *ngIf="!singleMonth">
+      <app-month-grid
+        [year]="leftYear"
+        [month]="leftMonth"
+        [showPrev]="true"
+        [showNext]="false"
+        [startDate]="pendingStart"
+        [endDate]="pendingEnd"
+        [hoverDate]="hoverDate"
+        [confirmed]="isConfirmed"
+        (dayClick)="onDayClick($event)"
+        (dayHover)="onDayHover($event)"
+        (prev)="goPrev()"
+      ></app-month-grid>
+
+      <div class="drp-divider"></div>
+
+      <app-month-grid
+        [year]="rightYear"
+        [month]="rightMonth"
+        [showPrev]="false"
+        [showNext]="true"
+        [startDate]="pendingStart"
+        [endDate]="pendingEnd"
+        [hoverDate]="hoverDate"
+        [confirmed]="isConfirmed"
+        (dayClick)="onDayClick($event)"
+        (dayHover)="onDayHover($event)"
+        (next)="goNext()"
+      ></app-month-grid>
+    </ng-container>
+
     <app-month-grid
+      *ngIf="singleMonth"
       [year]="leftYear"
       [month]="leftMonth"
       [showPrev]="true"
-      [showNext]="false"
-      [startDate]="pendingStart"
-      [endDate]="pendingEnd"
-      [hoverDate]="hoverDate"
-      [confirmed]="isConfirmed"
-      (dayClick)="onDayClick($event)"
-      (dayHover)="onDayHover($event)"
-      (prev)="goPrev()"
-    ></app-month-grid>
-
-    <div class="drp-divider"></div>
-
-    <app-month-grid
-      [year]="rightYear"
-      [month]="rightMonth"
-      [showPrev]="false"
       [showNext]="true"
       [startDate]="pendingStart"
       [endDate]="pendingEnd"
@@ -27,6 +44,7 @@
       [confirmed]="isConfirmed"
       (dayClick)="onDayClick($event)"
       (dayHover)="onDayHover($event)"
+      (prev)="goPrev()"
       (next)="goNext()"
     ></app-month-grid>
   </div>
