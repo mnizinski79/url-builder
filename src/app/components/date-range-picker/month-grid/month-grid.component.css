@@ -181,10 +181,18 @@
     bottom: 6px;
   }
 
+  /* Fixed centered square so the selection badge stays a true circle even
+     though the cell is wider than it is tall (1fr column vs 46px row). The
+     34px diameter matches the range strip's height (46px − 6px top/bottom). */
   .drp-day.start::after,
   .drp-day.end::after,
   .drp-day.hover-end::after {
-    inset: 6px;
+    inset: auto;
+    top: 50%;
+    left: 50%;
+    width: 34px;
+    height: 34px;
+    transform: translate(-50%, -50%);
     font-size: 16px;
   }
 }
