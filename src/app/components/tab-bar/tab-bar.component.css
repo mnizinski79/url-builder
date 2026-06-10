@@ -15,7 +15,7 @@
   font-size: 14px;
   font-weight: 500;
   color: var(--color-text-on-dark);
-  background: #183645;
+  background: #30627b;
   border: none;
   border-radius: 8px 8px 0 0;
   cursor: pointer;
@@ -25,11 +25,11 @@
 }
 
 .tab:hover:not(.disabled) {
-  background: #1e4055;
+  background: #3a728e;
 }
 
 .tab.active {
-  background: #30627b;
+  background: #183645;
 }
 
 .tab.disabled {
