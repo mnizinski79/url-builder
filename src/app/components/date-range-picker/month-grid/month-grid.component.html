@@ -1,0 +1,37 @@
+<div class="drp-month-header">
+  <button class="drp-nav-btn" *ngIf="showPrev" (click)="prev.emit()" aria-label="Previous month">‹</button>
+  <span class="drp-nav-spacer" *ngIf="!showPrev"></span>
+  <span class="drp-month-title">{{ monthTitle }}</span>
+  <button class="drp-nav-btn" *ngIf="showNext" (click)="next.emit()" aria-label="Next month">›</button>
+  <span class="drp-nav-spacer" *ngIf="!showNext"></span>
+</div>
+
+<div class="drp-grid" role="grid">
+  <span class="drp-dow" *ngFor="let d of DOW_LABELS" role="columnheader">{{ d }}</span>
+
+  <button
+    *ngFor="let cell of dayCells"
+    class="drp-day"
+    [class.empty]="cell.isEmpty"
+    [class.start]="cell.isStart"
+    [class.confirmed]="cell.isConfirmedStart"
+    [class.end]="cell.isEnd"
+    [class.in-range]="cell.isInRange"
+    [class.hover-range]="cell.isHoverRange"
+    [class.hover-end]="cell.isHoverEnd"
+    [attr.data-d]="cell.isEmpty ? null : cell.date.getDate()"
+    [attr.aria-label]="cell.ariaLabel || null"
+    [attr.aria-disabled]="cell.isEmpty ? 'true' : null"
+    [disabled]="cell.isEmpty"
+    (click)="!cell.isEmpty && dayClick.emit(cell.date)"
+    (mouseenter)="!cell.isEmpty && dayHover.emit(cell.date)"
+    role="gridcell"
+  >
+    <span
+      class="nights-tip"
+      *ngIf="cell.isHoverEnd && nightsCount !== null"
+      aria-hidden="true"
+    >{{ nightsCount }} nights</span>
+    {{ cell.isEmpty ? '' : cell.date.getDate() }}
+  </button>
+</div>

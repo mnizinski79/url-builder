@@ -1,0 +1,139 @@
+.drp-month-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  width: 224px;
+}
+.drp-month-title { font-size: 13px; font-weight: 600; color: #222226; }
+.drp-nav-btn {
+  background: none;
+  border: 1px solid #e0e0e2;
+  border-radius: 4px;
+  color: #6b6b6c;
+  font-size: 14px;
+  line-height: 1;
+  padding: 2px 8px;
+  cursor: pointer;
+  font-family: var(--font-stack);
+}
+.drp-nav-btn:hover { background: rgba(0,0,0,0.04); }
+.drp-nav-spacer { width: 32px; }
+
+.drp-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 32px);
+  grid-auto-rows: 32px;
+  gap: 0;
+  width: 224px;
+}
+
+.drp-dow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 600;
+  color: #9CA3AF;
+  height: 32px;
+}
+
+/* position:relative + z-index:0 creates a stacking context so
+   ::before { z-index:-1 } stays behind text within this cell only */
+.drp-day {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: #222226;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--font-stack);
+  outline: none;
+}
+.drp-day:not(.empty):not(.start):not(.end):not(.hover-end):hover {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 50%;
+}
+.drp-day.empty { cursor: default; pointer-events: none; }
+
+/* Range strip via ::before (26px tall, 3px top/bottom inset) */
+.drp-day.in-range::before,
+.drp-day.hover-range::before,
+.drp-day.start::before,
+.drp-day.end::before,
+.drp-day.hover-end::before {
+  content: '';
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  left: 0;
+  right: 0;
+  z-index: -1;
+}
+
+.drp-day.in-range::before    { background: #d0e4ee; }
+.drp-day.hover-range::before { background: #e2eff6; }
+
+.drp-day.start::before           { left: 50%; background: #e2eff6; }
+.drp-day.start.confirmed::before { background: #d0e4ee; }
+
+.drp-day.end::before       { right: 50%; background: #d0e4ee; }
+.drp-day.hover-end::before { right: 50%; background: #e2eff6; }
+
+/* Circle badge via ::after (26px diameter, same 3px inset) */
+.drp-day.start::after,
+.drp-day.end::after,
+.drp-day.hover-end::after {
+  content: attr(data-d);
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  z-index: 1;
+}
+.drp-day.start::after, .drp-day.end::after { background: #1f4456; color: white; }
+.drp-day.hover-end::after { background: #2b6880; color: white; }
+
+.drp-day.start,
+.drp-day.end,
+.drp-day.hover-end { color: transparent; }
+
+.drp-day.hover-end { z-index: 2; }
+
+/* Nights counter tooltip */
+.nights-tip {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1a1a1a;
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  padding: 5px 10px;
+  border-radius: 6px;
+  z-index: 10;
+  pointer-events: none;
+  font-family: var(--font-stack);
+}
+.nights-tip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: #1a1a1a;
+}
