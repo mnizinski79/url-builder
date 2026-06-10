@@ -5,13 +5,13 @@
 }
 
 :root {
-  --color-navy: #1B2A4A;
+  --color-navy: #1f4456;
   --color-red: #C41230;
   --color-bg-page: #EFEFEF;
   --color-bg-card: #FFFFFF;
   --color-bg-section-expanded: #F5F5F5;
   --color-border: #D0D0D0;
-  --color-border-focus: #1B2A4A;
+  --color-border-focus: #1f4456;
   --color-border-error: #C41230;
   --color-text-primary: #333333;
   --color-text-muted: #6B7280;
