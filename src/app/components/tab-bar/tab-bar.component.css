@@ -42,5 +42,9 @@
 
 @media (max-width: 768px) {
   .tab-bar-wrapper { padding: 0 16px; overflow-x: auto; }
-  .tab-bar { flex-wrap: nowrap; }
+  .tab-bar {
+    flex-wrap: nowrap;
+    justify-content: center;
+    padding: 0;
+  }
 }
