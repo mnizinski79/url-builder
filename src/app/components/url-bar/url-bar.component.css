@@ -155,3 +155,11 @@
   opacity: 0.88;
   background: var(--color-navy);
 }
+
+@media (max-width: 768px) {
+  :host { padding: 16px; }
+  .popover {
+    width: calc(100vw - 32px);
+    max-width: 420px;
+  }
+}
