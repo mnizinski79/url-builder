@@ -18,15 +18,27 @@ export class NumberSpinnerFieldComponent {
   @Input() min = 1;
   @Input() max = 9;
   @Input() control!: FormControl;
-  @Input() icon = '🛏';
+
+  /** Current value coerced to a number; empty/invalid resolves to `min`. */
+  get current(): number {
+    const n = parseInt(this.control.value, 10);
+    return isNaN(n) ? this.min : n;
+  }
 
   increment(): void {
-    const current = this.control.value ?? this.min;
-    if (current < this.max) this.control.setValue(current + 1);
+    this.control.setValue(this.clamp(this.current + 1));
   }
 
   decrement(): void {
-    const current = this.control.value ?? this.min;
-    if (current > this.min) this.control.setValue(current - 1);
+    this.control.setValue(this.clamp(this.current - 1));
+  }
+
+  /** Clamp/coerce a typed value on blur so the control always ends valid. */
+  onBlur(): void {
+    this.control.setValue(this.clamp(this.current));
+  }
+
+  private clamp(n: number): number {
+    return Math.min(this.max, Math.max(this.min, n));
   }
 }
