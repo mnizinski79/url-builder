@@ -41,6 +41,15 @@ export class MonthGridComponent implements OnInit, OnChanges {
   monthTitle = '';
   nightsCount: number | null = null;
 
+  // Fix 3: chunk dayCells into week rows for role="row" wrappers
+  get weeks(): DayCell[][] {
+    const result: DayCell[][] = [];
+    for (let i = 0; i < this.dayCells.length; i += 7) {
+      result.push(this.dayCells.slice(i, i + 7));
+    }
+    return result;
+  }
+
   ngOnInit(): void {
     this.rebuild();
   }
@@ -78,11 +87,13 @@ export class MonthGridComponent implements OnInit, OnChanges {
   private classifyCell(date: Date): DayCell {
     const isStart = this.isSameDay(date, this.startDate);
     const isEnd = this.isSameDay(date, this.endDate);
-    const isHoverEnd = !this.confirmed && !isEnd && this.isSameDay(date, this.hoverDate);
+    // Fix 2: removed !isEnd guard — CSS handles .end and .hover-end independently
+    const isHoverEnd = !this.confirmed && this.isSameDay(date, this.hoverDate);
     const isInRange = !isStart && !isEnd && this.confirmed
       && this.between(date, this.startDate, this.endDate);
+    // Fix 1: use toMidnight() for DST-safe comparison
     const isHoverRange = !isStart && !isHoverEnd && !this.confirmed
-      && !!this.hoverDate && this.hoverDate > (this.startDate ?? new Date(0))
+      && !!this.hoverDate && this.toMidnight(this.hoverDate) > this.toMidnight(this.startDate ?? new Date(0))
       && this.between(date, this.startDate, this.hoverDate);
 
     return {
@@ -97,16 +108,21 @@ export class MonthGridComponent implements OnInit, OnChanges {
     };
   }
 
+  // Fix 1: normalize to local midnight before comparing
+  private toMidnight(d: Date): number {
+    return new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
+  }
+
   private isSameDay(a: Date, b: Date | null): boolean {
     if (!b) return false;
-    return a.getFullYear() === b.getFullYear()
-      && a.getMonth() === b.getMonth()
-      && a.getDate() === b.getDate();
+    return this.toMidnight(a) === this.toMidnight(b);
   }
 
   private between(date: Date, start: Date | null, end: Date | null): boolean {
     if (!start || !end) return false;
-    const t = date.getTime(), s = start.getTime(), e = end.getTime();
+    const t = this.toMidnight(date);
+    const s = this.toMidnight(start);
+    const e = this.toMidnight(end);
     return s < e ? t > s && t < e : t > e && t < s;
   }
 
@@ -118,9 +134,10 @@ export class MonthGridComponent implements OnInit, OnChanges {
     return base;
   }
 
+  // Fix 1: normalize both dates before diffing
   private computeNights(): number | null {
     if (!this.startDate || !this.hoverDate || this.confirmed) return null;
-    const diff = this.hoverDate.getTime() - this.startDate.getTime();
+    const diff = this.toMidnight(this.hoverDate) - this.toMidnight(this.startDate);
     return diff > 0 ? Math.round(diff / 86_400_000) : null;
   }
 }

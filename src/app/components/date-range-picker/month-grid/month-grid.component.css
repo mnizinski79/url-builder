@@ -28,6 +28,9 @@
   width: 224px;
 }
 
+/* Fix 3: display:contents makes the row wrapper transparent to the grid layout */
+.drp-row { display: contents; }
+
 .drp-dow {
   display: flex;
   align-items: center;
@@ -55,8 +58,9 @@
   border: none;
   padding: 0;
   font-family: var(--font-stack);
-  outline: none;
 }
+/* Fix 4: accessible focus indicator instead of outline:none */
+.drp-day:focus-visible { outline: 2px solid #1f4456; outline-offset: 1px; border-radius: 50%; }
 .drp-day:not(.empty):not(.start):not(.end):not(.hover-end):hover {
   background: rgba(0, 0, 0, 0.05);
   border-radius: 50%;
