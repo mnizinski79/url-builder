@@ -19,7 +19,9 @@
     </span>
   </div>
 
-  <div class="drp-picker-wrap" *ngIf="isOpen">
+  <div class="drp-picker-wrap" *ngIf="isOpen"
+       [style.top.px]="pickerTop"
+       [style.right.px]="pickerRight">
     <app-date-range-picker
       [startDate]="parsedStart"
       [endDate]="parsedEnd"

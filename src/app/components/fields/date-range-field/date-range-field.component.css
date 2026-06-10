@@ -42,8 +42,6 @@
 .drp-field-text.placeholder { color: var(--color-text-placeholder); }
 
 .drp-picker-wrap {
-  position: absolute;
-  top: calc(100% + 4px);
-  right: 0;
+  position: fixed;
   z-index: 200;
 }

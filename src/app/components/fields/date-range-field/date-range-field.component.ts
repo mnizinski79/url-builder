@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { TooltipComponent } from '../../tooltip/tooltip.component';
@@ -20,6 +20,10 @@ export class DateRangeFieldComponent {
   @Input() checkOutControl!: FormControl;
 
   isOpen = false;
+  pickerTop = 0;
+  pickerRight = 0;
+
+  constructor(private el: ElementRef) {}
 
   get parsedStart(): Date | null {
     const v = this.checkInControl?.value;
@@ -47,7 +51,18 @@ export class DateRangeFieldComponent {
 
   togglePicker(event: Event): void {
     event.stopPropagation();
+    if (!this.isOpen) {
+      this.updatePickerPosition();
+    }
     this.isOpen = !this.isOpen;
+  }
+
+  private updatePickerPosition(): void {
+    const trigger = this.el.nativeElement.querySelector('.drp-trigger');
+    if (!trigger) return;
+    const rect = (trigger as HTMLElement).getBoundingClientRect();
+    this.pickerTop = rect.bottom + 4;
+    this.pickerRight = window.innerWidth - rect.right;
   }
 
   onTriggerKeydown(event: KeyboardEvent): void {
