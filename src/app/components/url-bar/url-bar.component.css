@@ -3,9 +3,8 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  background: var(--color-navy);
-  padding: 20px 32px;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+  background: #183645;
+  padding: 20px 32px 28px;
 }
 
 .url-bar {
@@ -27,13 +26,13 @@
   display: flex;
   align-items: baseline;
   white-space: nowrap;
-  font-size: 13px;
-  font-family: 'Menlo', 'Consolas', monospace;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
   overflow: hidden;
 }
 
-.url-base { color: var(--color-text-on-dark); flex-shrink: 0; }
-.url-query { color: var(--color-text-on-dark-muted); }
+.url-base { color: rgba(255, 255, 255, 0.5); flex-shrink: 0; }
+.url-query { color: var(--color-text-on-dark); }
 
 .url-fade {
   position: absolute;
@@ -41,7 +40,7 @@
   right: 0;
   width: 60px;
   height: 100%;
-  background: linear-gradient(to right, transparent, var(--color-navy));
+  background: linear-gradient(to right, transparent, #183645);
   pointer-events: none;
 }
 
