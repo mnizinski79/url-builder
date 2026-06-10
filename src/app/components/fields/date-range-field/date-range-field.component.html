@@ -5,10 +5,23 @@
     </label>
     <app-tooltip *ngIf="tooltip" [text]="tooltip"></app-tooltip>
   </div>
-  <div class="date-range-wrapper">
-    <ph-icon name="calendar-blank" [size]="16" class="date-icon"></ph-icon>
-    <input type="date" class="date-input" [formControl]="checkInControl" />
-    <span class="date-arrow">→</span>
-    <input type="date" class="date-input" [formControl]="checkOutControl" />
+
+  <div class="drp-trigger" (click)="togglePicker($event)" role="button" tabindex="0"
+       (keydown.enter)="togglePicker($event)" (keydown.space)="togglePicker($event)">
+    <div class="drp-trigger-icon">
+      <ph-icon name="calendar-blank" [size]="16"></ph-icon>
+    </div>
+    <span class="drp-field-text" [class.placeholder]="!displayText">
+      {{ displayText || 'Select date range…' }}
+    </span>
+  </div>
+
+  <div class="drp-picker-wrap" *ngIf="isOpen">
+    <app-date-range-picker
+      [startDate]="parsedStart"
+      [endDate]="parsedEnd"
+      (apply)="onApply($event)"
+      (cancel)="onCancel()"
+    ></app-date-range-picker>
   </div>
 </div>
