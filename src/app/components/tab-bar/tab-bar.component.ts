@@ -22,7 +22,7 @@ export class TabBarComponent {
   tabs: Tab[] = [
     { key: 'home', label: 'Home', disabled: false },
     { key: 'search', label: 'Search', disabled: false },
-    { key: null, label: 'Hotel Details', disabled: true },
+    { key: null, label: 'Hotel details', disabled: true },
     { key: null, label: 'CRR', disabled: true },
   ];
 

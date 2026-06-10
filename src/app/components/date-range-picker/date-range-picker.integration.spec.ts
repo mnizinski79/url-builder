@@ -27,10 +27,10 @@ describe('Date range picker integration (full app)', () => {
     (fixture.componentInstance as { onTabChange(tab: string): void }).onTabChange('search');
     fixture.detectChanges();
 
-    // Expand the "Itinerary Details" collapsible section via a real click
+    // Expand the "Itinerary details" collapsible section via a real click
     const headers = Array.from(el.querySelectorAll('.section-header')) as HTMLElement[];
-    const itinerary = headers.find((h) => h.textContent?.includes('Itinerary Details'));
-    expect(itinerary).withContext('Itinerary Details section header should exist').toBeDefined();
+    const itinerary = headers.find((h) => h.textContent?.includes('Itinerary details'));
+    expect(itinerary).withContext('Itinerary details section header should exist').toBeDefined();
     itinerary!.click();
     fixture.detectChanges();
   });

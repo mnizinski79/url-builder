@@ -30,7 +30,7 @@ try {
   // 2. Expand Itinerary Details
   await page.evaluate(() => {
     const headers = [...document.querySelectorAll('.section-header')];
-    const itin = headers.find((h) => h.textContent.includes('Itinerary Details'));
+    const itin = headers.find((h) => h.textContent.includes('Itinerary details'));
     if (!itin) throw new Error('Itinerary section not found');
     itin.click();
   });
