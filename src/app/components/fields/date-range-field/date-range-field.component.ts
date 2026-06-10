@@ -20,6 +20,7 @@ export class DateRangeFieldComponent {
   @Input() checkOutControl!: FormControl;
 
   isOpen = false;
+  isMobile = false;
   pickerTop = 0;
   pickerRight = 0;
 
@@ -63,6 +64,7 @@ export class DateRangeFieldComponent {
   togglePicker(event: Event): void {
     event.stopPropagation();
     if (!this.isOpen) {
+      this.isMobile = window.matchMedia('(max-width: 768px)').matches;
       this.updatePickerPosition();
     }
     this.isOpen = !this.isOpen;

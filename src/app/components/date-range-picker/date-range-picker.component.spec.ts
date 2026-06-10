@@ -19,6 +19,47 @@ describe('DateRangePickerComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  describe('single-month mode', () => {
+    it('renders two month grids and a divider by default', () => {
+      const el = fixture.nativeElement as HTMLElement;
+      expect(el.querySelectorAll('app-month-grid').length).toBe(2);
+      expect(el.querySelector('.drp-divider')).not.toBeNull();
+    });
+
+    it('renders exactly one month grid and no divider when singleMonth is true', () => {
+      component.singleMonth = true;
+      fixture.detectChanges();
+      const el = fixture.nativeElement as HTMLElement;
+      expect(el.querySelectorAll('app-month-grid').length).toBe(1);
+      expect(el.querySelector('.drp-divider')).toBeNull();
+    });
+
+    it('the single month grid shows both nav buttons wired prev→goPrev, next→goNext', () => {
+      component.singleMonth = true;
+      component.leftYear = 2026;
+      component.leftMonth = 5; // June
+      fixture.detectChanges();
+      const el = fixture.nativeElement as HTMLElement;
+      const navBtns = el.querySelectorAll<HTMLButtonElement>('app-month-grid .drp-nav-btn');
+      expect(navBtns.length).toBe(2);
+      // MonthGridComponent renders prev (‹) first, next (›) second.
+      navBtns[0].click(); // prev → goPrev → May
+      expect(component.leftMonth).toBe(4);
+      navBtns[1].click(); // next → goNext → June
+      expect(component.leftMonth).toBe(5);
+    });
+
+    it('goNext/goPrev still advance the visible month in single-month mode', () => {
+      component.singleMonth = true;
+      component.leftYear = 2026;
+      component.leftMonth = 5;
+      component.goNext();
+      expect(component.leftMonth).toBe(6);
+      component.goPrev();
+      expect(component.leftMonth).toBe(5);
+    });
+  });
+
   describe('state machine', () => {
     it('should be idle on init', () => {
       expect(component.phase).toBe('idle');

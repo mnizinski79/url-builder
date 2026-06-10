@@ -45,3 +45,36 @@
   position: fixed;
   z-index: 200;
 }
+
+.drp-sheet-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.drp-sheet {
+  width: 100%;
+  background: var(--color-bg-card);
+  border-radius: 16px 16px 0 0;
+  padding: 8px 0 16px;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: drpSheetUp 200ms ease;
+}
+
+.drp-sheet-handle {
+  width: 36px;
+  height: 4px;
+  background: #d0d0d0;
+  border-radius: 2px;
+  margin: 4px auto 8px;
+}
+
+@keyframes drpSheetUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}

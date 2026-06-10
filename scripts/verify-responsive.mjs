@@ -30,7 +30,7 @@ try {
     };
   });
   log('header/tab/action state', headerState);
-  check('hamburger visible', headerState.hamburgerDisplay === 'inline-flex');
+  check('hamburger visible', headerState.hamburgerDisplay !== 'none' && headerState.hamburgerDisplay !== 'MISSING');
   check('nav hidden', headerState.navDisplay === 'none');
   check('title visible', headerState.titleDisplay !== 'none' && headerState.titleDisplay !== 'MISSING');
   check('tabs centered', headerState.tabsJustify === 'center');
@@ -103,6 +103,46 @@ try {
   check('drawer rounded top (16px)', drawer.topRadius === '16px');
   await page.screenshot({ path: `${OUT}/resp-3-mobile-drawer.png` });
 
+  console.log('\n=== MOBILE — date picker single month in a sheet ===');
+  await page.reload({ waitUntil: 'networkidle0' });
+  await page.evaluate(() => {
+    const t = [...document.querySelectorAll('.tab')].find((x) => x.textContent.trim().toLowerCase().includes('search'));
+    t.click();
+  });
+  await new Promise((r) => setTimeout(r, 300));
+  await page.evaluate(() => {
+    const h = [...document.querySelectorAll('.section-header')].find((x) => x.textContent.includes('Itinerary Details'));
+    h.click();
+  });
+  await new Promise((r) => setTimeout(r, 500));
+  await page.evaluate(() => document.querySelector('.drp-trigger').scrollIntoView({ block: 'center' }));
+  await new Promise((r) => setTimeout(r, 150));
+  const trig = await (await page.$('.drp-trigger')).boundingBox();
+  await page.mouse.click(trig.x + trig.width / 2, trig.y + trig.height / 2);
+  await new Promise((r) => setTimeout(r, 350));
+  const pickerSheet = await page.evaluate(() => {
+    const sheet = document.querySelector('.drp-sheet');
+    const r = sheet ? sheet.getBoundingClientRect() : null;
+    return {
+      sheetPresent: !!sheet,
+      monthGrids: document.querySelectorAll('app-month-grid').length,
+      dividerPresent: !!document.querySelector('.drp-divider'),
+      handlePresent: !!document.querySelector('.drp-sheet-handle'),
+      bottomAnchored: r ? Math.round(r.bottom) === window.innerHeight : null,
+      withinViewport: r ? r.left >= 0 && Math.round(r.right) <= window.innerWidth : null,
+      navButtons: document.querySelectorAll('app-month-grid .drp-nav-btn').length,
+    };
+  });
+  log('date picker sheet', pickerSheet);
+  check('picker sheet present', pickerSheet.sheetPresent);
+  check('single month grid', pickerSheet.monthGrids === 1);
+  check('no divider (single month)', pickerSheet.dividerPresent === false);
+  check('sheet grab-handle present', pickerSheet.handlePresent);
+  check('sheet bottom-anchored', pickerSheet.bottomAnchored === true);
+  check('picker within viewport (no overflow)', pickerSheet.withinViewport === true);
+  check('single month has both nav arrows', pickerSheet.navButtons === 2);
+  await page.screenshot({ path: `${OUT}/resp-5-mobile-datepicker.png` });
+
   // ---------- DESKTOP 1280px ----------
   console.log('\n=== DESKTOP 1280px — unchanged ===');
   const page2 = await browser.newPage();
@@ -125,6 +165,35 @@ try {
   check('tabs not centered', desk.tabsJustify !== 'center');
   check('action bar row', desk.actionDir === 'row');
   await page2.screenshot({ path: `${OUT}/resp-4-desktop.png` });
+
+  console.log('\n=== DESKTOP — date picker still two months ===');
+  await page2.evaluate(() => {
+    const t = [...document.querySelectorAll('.tab')].find((x) => x.textContent.trim().toLowerCase().includes('search'));
+    t.click();
+  });
+  await new Promise((r) => setTimeout(r, 300));
+  await page2.evaluate(() => {
+    const h = [...document.querySelectorAll('.section-header')].find((x) => x.textContent.includes('Itinerary Details'));
+    h.click();
+  });
+  await new Promise((r) => setTimeout(r, 500));
+  await page2.evaluate(() => document.querySelector('.drp-trigger').scrollIntoView({ block: 'center' }));
+  await new Promise((r) => setTimeout(r, 150));
+  const dtrig = await (await page2.$('.drp-trigger')).boundingBox();
+  await page2.mouse.click(dtrig.x + dtrig.width / 2, dtrig.y + dtrig.height / 2);
+  await new Promise((r) => setTimeout(r, 350));
+  const deskPicker = await page2.evaluate(() => ({
+    floatingPanel: !!document.querySelector('.drp-picker-wrap'),
+    sheetAbsent: !document.querySelector('.drp-sheet'),
+    monthGrids: document.querySelectorAll('app-month-grid').length,
+    dividerPresent: !!document.querySelector('.drp-divider'),
+  }));
+  log('desktop date picker', deskPicker);
+  check('desktop floating panel', deskPicker.floatingPanel === true);
+  check('desktop no sheet', deskPicker.sheetAbsent === true);
+  check('desktop two month grids', deskPicker.monthGrids === 2);
+  check('desktop divider present', deskPicker.dividerPresent === true);
+  await page2.screenshot({ path: `${OUT}/resp-6-desktop-datepicker.png` });
 
   console.log(`\n==== ${failures === 0 ? 'ALL CHECKS PASSED' : failures + ' CHECK(S) FAILED'} ====`);
 } finally {

@@ -12,6 +12,10 @@ describe('Date range picker integration (full app)', () => {
 
   beforeEach(async () => {
     localStorage.clear();
+    // This suite validates the desktop two-month picker flow. Force desktop
+    // mode so it is independent of the Karma browser window width (which is
+    // ~756px and would otherwise trigger the mobile single-month sheet).
+    spyOn(window, 'matchMedia').and.returnValue({ matches: false } as MediaQueryList);
     await TestBed.configureTestingModule({
       imports: [AppComponent],
     }).compileComponents();

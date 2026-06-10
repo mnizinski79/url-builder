@@ -61,3 +61,19 @@
   opacity: 0.4;
   cursor: default;
 }
+
+/* At ≤768px the picker is only rendered inside the field's bottom sheet,
+   always with singleMonth=true. The two-month layout is not used here. */
+@media (max-width: 768px) {
+  .drp-panel {
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 16px;
+    display: block;
+    width: 100%;
+  }
+  .drp-months {
+    justify-content: center;
+  }
+}

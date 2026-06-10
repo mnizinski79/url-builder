@@ -76,4 +76,40 @@ describe('DateRangeFieldComponent', () => {
     expect(component.isOpen).toBeFalse();
     expect(component.checkInControl.value).toBe('');
   });
+
+  it('isMobile is false initially', () => {
+    expect(component.isMobile).toBeFalse();
+  });
+
+  it('opening at <=768px sets isMobile and renders the sheet with singleMonth', () => {
+    spyOn(window, 'matchMedia').and.returnValue({ matches: true } as MediaQueryList);
+    const event = new MouseEvent('click');
+    component.togglePicker(event);
+    fixture.detectChanges();
+    expect(component.isMobile).toBeTrue();
+    const el = fixture.nativeElement as HTMLElement;
+    expect(el.querySelector('.drp-sheet-backdrop')).not.toBeNull();
+    expect(el.querySelector('.drp-picker-wrap')).toBeNull();
+  });
+
+  it('opening above 768px renders the floating panel, not the sheet', () => {
+    spyOn(window, 'matchMedia').and.returnValue({ matches: false } as MediaQueryList);
+    const event = new MouseEvent('click');
+    component.togglePicker(event);
+    fixture.detectChanges();
+    expect(component.isMobile).toBeFalse();
+    const el = fixture.nativeElement as HTMLElement;
+    expect(el.querySelector('.drp-picker-wrap')).not.toBeNull();
+    expect(el.querySelector('.drp-sheet-backdrop')).toBeNull();
+  });
+
+  it('clicking the sheet backdrop cancels and closes', () => {
+    spyOn(window, 'matchMedia').and.returnValue({ matches: true } as MediaQueryList);
+    component.togglePicker(new MouseEvent('click'));
+    fixture.detectChanges();
+    const backdrop = (fixture.nativeElement as HTMLElement).querySelector<HTMLElement>('.drp-sheet-backdrop')!;
+    backdrop.click();
+    expect(component.isOpen).toBeFalse();
+    expect(component.checkInControl.value).toBe('');
+  });
 });

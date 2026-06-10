@@ -19,14 +19,28 @@
     </span>
   </div>
 
-  <div class="drp-picker-wrap" *ngIf="isOpen"
+  <div class="drp-picker-wrap" *ngIf="isOpen && !isMobile"
        [style.top.px]="pickerTop"
        [style.right.px]="pickerRight">
     <app-date-range-picker
+      [singleMonth]="false"
       [startDate]="parsedStart"
       [endDate]="parsedEnd"
       (apply)="onApply($event)"
       (cancel)="onCancel()"
     ></app-date-range-picker>
+  </div>
+
+  <div class="drp-sheet-backdrop" *ngIf="isOpen && isMobile" (click)="onCancel()">
+    <div class="drp-sheet" (click)="$event.stopPropagation()">
+      <div class="drp-sheet-handle"></div>
+      <app-date-range-picker
+        [singleMonth]="true"
+        [startDate]="parsedStart"
+        [endDate]="parsedEnd"
+        (apply)="onApply($event)"
+        (cancel)="onCancel()"
+      ></app-date-range-picker>
+    </div>
   </div>
 </div>
