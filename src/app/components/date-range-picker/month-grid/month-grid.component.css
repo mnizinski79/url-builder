@@ -1,3 +1,5 @@
+:host { display: block; }
+
 .drp-month-header {
   display: flex;
   align-items: center;
@@ -140,4 +142,49 @@
   transform: translateX(-50%);
   border: 5px solid transparent;
   border-top-color: #1a1a1a;
+}
+
+/* Mobile single-month sheet: fill the sheet width with larger, square cells.
+   Only applies at ≤768px, where the grid renders inside the bottom sheet
+   (the two-month desktop panel renders above 768px and is unaffected). */
+@media (max-width: 768px) {
+  :host { width: 100%; }
+  .drp-month-header { width: 100%; }
+  .drp-month-title { font-size: 15px; }
+
+  .drp-grid {
+    grid-template-columns: repeat(7, 1fr);
+    grid-auto-rows: 46px;
+    width: 100%;
+  }
+
+  /* Cells fill the 1fr column width and stretch to the 46px row height
+     (grid items stretch by default), giving roomy, near-square cells. */
+  .drp-dow {
+    height: auto;
+    font-size: 13px;
+  }
+
+  .drp-day {
+    width: auto;
+    height: auto;
+    font-size: 16px;
+  }
+
+  /* Keep the range strip and selection circle proportional in the larger cell */
+  .drp-day.in-range::before,
+  .drp-day.hover-range::before,
+  .drp-day.start::before,
+  .drp-day.end::before,
+  .drp-day.hover-end::before {
+    top: 6px;
+    bottom: 6px;
+  }
+
+  .drp-day.start::after,
+  .drp-day.end::after,
+  .drp-day.hover-end::after {
+    inset: 6px;
+    font-size: 16px;
+  }
 }
