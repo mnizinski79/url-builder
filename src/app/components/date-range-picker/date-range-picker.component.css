@@ -56,8 +56,8 @@
   border: none;
 }
 .drp-btn-apply:hover { opacity: 0.88; }
-.drp-btn-apply[aria-disabled='true'] {
+.drp-btn-apply:disabled,
+.drp-btn-apply[disabled] {
   opacity: 0.4;
   cursor: default;
-  pointer-events: none;
 }

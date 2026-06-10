@@ -36,7 +36,7 @@
     <button
       class="drp-btn-apply"
       type="button"
-      [attr.aria-disabled]="!canApply ? 'true' : null"
+      [disabled]="!canApply"
       (click)="onApply()"
     >Apply</button>
   </div>

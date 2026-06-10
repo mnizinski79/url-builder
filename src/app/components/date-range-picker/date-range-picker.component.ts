@@ -60,7 +60,7 @@ export class DateRangePickerComponent implements OnInit {
       return;
     }
     // awaiting-end
-    if (!this.pendingStart || date <= this.pendingStart) {
+    if (!this.pendingStart || this.toMidnight(date) <= this.toMidnight(this.pendingStart)) {
       this.pendingStart = date;
       this.pendingEnd = null;
       this.hoverDate = null;
@@ -93,13 +93,18 @@ export class DateRangePickerComponent implements OnInit {
   }
 
   onCancel(): void {
+    this.hoverDate = null;
     this.cancel.emit();
   }
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent): void {
     if (!this.el.nativeElement.contains(event.target as Node)) {
-      this.cancel.emit();
+      this.onCancel(); // single cancel code path
     }
+  }
+
+  private toMidnight(d: Date): number {
+    return new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
   }
 }
