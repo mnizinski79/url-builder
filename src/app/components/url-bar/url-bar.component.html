@@ -20,6 +20,16 @@
           <button type="button" class="popover-close" (click)="closePopover()" aria-label="Close"><ph-icon name="x" [size]="16"></ph-icon></button>
         </div>
         <textarea class="popover-url" readonly>{{ fullUrlValue }}</textarea>
+        <div class="popover-footer">
+          <button *ngIf="canShare" type="button" class="popover-action-btn" (click)="share()">
+            <ph-icon name="export" [size]="14"></ph-icon>
+            Share
+          </button>
+          <button type="button" class="popover-action-btn popover-action-btn--primary" (click)="visit()">
+            <ph-icon name="arrow-square-out" [size]="14"></ph-icon>
+            Visit
+          </button>
+        </div>
       </div>
     </div>
   </div>

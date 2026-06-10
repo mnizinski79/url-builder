@@ -1,56 +1,65 @@
 <div class="form-container">
   <!-- Core Environment Setup -->
   <app-collapsible-section title="Core Environment Setup" subtitle="Brand, language, and tracking basics" [expanded]="true">
-    <div class="form-grid">
-      <app-select-field
-        label="Brand"
-        [groups]="brandGroups"
-        [control]="c['brandCode']"
-        tooltip="The IHG brand to target. Each brand has a unique code used to filter content and rates."
-      ></app-select-field>
-      <app-select-field
-        label="Language"
-        [options]="languageOptions"
-        [control]="c['language']"
-        tooltip="Locale determines the language and regional content served on the page."
-      ></app-select-field>
-      <app-text-field
-        label="PMID"
-        placeholder="e.g. GGLB"
-        [control]="c['pmid']"
-        tooltip="Paid Media ID — 4-character code identifying the campaign traffic source."
-      ></app-text-field>
-      <app-text-field
-        label="Global Attribution (GLAT)"
-        placeholder="e.g. MCEN"
-        [control]="c['glat']"
-        tooltip="Global attribution tracking code, minimum 4 characters. Used for cross-channel attribution."
-      ></app-text-field>
-      <app-text-field
-        label="Rate Code"
-        placeholder="e.g. 6CBARC"
-        [control]="c['rateCode']"
-        tooltip="Specific rate plan code to pre-select on the landing page."
-      ></app-text-field>
-      <app-toggle-field
-        label="Domain Persistence"
-        description="Allow tracking cookies across IHG domains"
-        [control]="c['domainPersistence']"
-        tooltip="Allows tracking cookies to persist across IHG domains for consistent attribution."
-      ></app-toggle-field>
-      <app-toggle-field
-        label="China Domain"
-        description="Route traffic through China-specific domain"
-        [control]="c['chinaDomain']"
-        tooltip="Routes traffic through IHG's China-specific domain for GC market campaigns."
-      ></app-toggle-field>
+    <div class="form-section-body">
+      <!-- Row 1: Brand, Language (2 col) -->
+      <div class="form-row">
+        <app-select-field
+          label="Brand"
+          [groups]="brandGroups"
+          [control]="c['brandCode']"
+          tooltip="The IHG brand to target. Each brand has a unique code used to filter content and rates."
+        ></app-select-field>
+        <app-select-field
+          label="Language"
+          [options]="languageOptions"
+          [control]="c['language']"
+          tooltip="Locale determines the language and regional content served on the page."
+        ></app-select-field>
+      </div>
+      <!-- Row 2: PMID, GLAT, Rate Code (3 col) -->
+      <div class="form-row form-row--3col">
+        <app-text-field
+          label="PMID"
+          placeholder="e.g. GGLB"
+          [control]="c['pmid']"
+          tooltip="Paid Media ID — 4-character code identifying the campaign traffic source."
+        ></app-text-field>
+        <app-text-field
+          label="Global Attribution (GLAT)"
+          placeholder="e.g. MCEN"
+          [control]="c['glat']"
+          tooltip="Global attribution tracking code, minimum 4 characters. Used for cross-channel attribution."
+        ></app-text-field>
+        <app-text-field
+          label="Rate Code"
+          placeholder="e.g. 6CBARC"
+          [control]="c['rateCode']"
+          tooltip="Specific rate plan code to pre-select on the landing page."
+        ></app-text-field>
+      </div>
+      <!-- Row 3: Toggles (2 col) -->
+      <div class="form-row">
+        <app-toggle-field
+          label="Domain Persistence"
+          description="Allow tracking cookies across IHG domains"
+          [control]="c['domainPersistence']"
+          tooltip="Allows tracking cookies to persist across IHG domains for consistent attribution."
+        ></app-toggle-field>
+        <app-toggle-field
+          label="China Domain"
+          description="Route traffic through China-specific domain"
+          [control]="c['chinaDomain']"
+          tooltip="Routes traffic through IHG's China-specific domain for GC market campaigns."
+        ></app-toggle-field>
+      </div>
     </div>
   </app-collapsible-section>
 
   <!-- Search-only sections -->
   <ng-container *ngIf="isSearch">
     <!-- Itinerary Details -->
-    <app-collapsible-section title="Itinerary Details" subtitle="Destination, dates, and room count" [expanded]="true">
+    <app-collapsible-section title="Itinerary Details" subtitle="Destination, dates, and room count">
       <div class="form-grid">
         <app-text-field
           label="Destination"
@@ -171,8 +180,4 @@
     </app-collapsible-section>
   </ng-container>
 
-  <!-- Actions -->
-  <div class="form-actions">
-    <button type="button" class="btn-secondary" (click)="reset()">Clear Form</button>
-  </div>
 </div>

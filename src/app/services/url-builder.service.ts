@@ -15,10 +15,12 @@ export class UrlBuilderService {
 
     params.set('path', tab);
 
-    const { regionCode, localeCode } = LANGUAGE_MAP[values.language] ?? { regionCode: 'us', localeCode: 'en' };
-    params.set('brandCode', values.brandCode);
-    params.set('regionCode', regionCode);
-    params.set('localeCode', localeCode);
+    if (values.brandCode) params.set('brandCode', values.brandCode);
+    if (values.language) {
+      const { regionCode, localeCode } = LANGUAGE_MAP[values.language] ?? {};
+      if (regionCode) params.set('regionCode', regionCode);
+      if (localeCode) params.set('localeCode', localeCode);
+    }
 
     this.appendIfFilled(params, 'pmid', values.pmid);
     this.appendIfFilled(params, 'glat', values.glat);

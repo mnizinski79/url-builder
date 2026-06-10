@@ -10,6 +10,7 @@ import { TabBarComponent } from './components/tab-bar/tab-bar.component';
 import { FormContainerComponent } from './components/form-container/form-container.component';
 import { SaveModalComponent } from './components/save-modal/save-modal.component';
 import { DrawerComponent } from './components/drawer/drawer.component';
+import { PhIconComponent } from './components/ph-icon/ph-icon.component';
 
 @Component({
   selector: 'app-root',
@@ -22,6 +23,7 @@ import { DrawerComponent } from './components/drawer/drawer.component';
     FormContainerComponent,
     SaveModalComponent,
     DrawerComponent,
+    PhIconComponent,
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
@@ -44,6 +46,7 @@ export class AppComponent implements OnInit {
   }
 
   onTabChange(tab: TabKey): void {
+    this.formState.syncSharedFields(this.activeTab, tab);
     this.activeTab = tab;
     this.rebuildUrl();
   }
@@ -92,6 +95,11 @@ export class AppComponent implements OnInit {
 
   onSaveCancelled(): void {
     this.showSaveModal = false;
+  }
+
+  clearForm(): void {
+    this.formState.resetForm(this.activeTab);
+    this.rebuildUrl();
   }
 
   openSaved(): void {

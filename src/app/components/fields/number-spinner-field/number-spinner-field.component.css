@@ -1,17 +1,16 @@
 .field { display: flex; flex-direction: column; gap: 6px; }
 
 .field-label-row { display: flex; align-items: center; justify-content: space-between; }
-.field-label { font-size: 12px; font-weight: 500; color: var(--color-text-primary); }
+.field-label { font-size: 13px; font-weight: 500; color: var(--color-text-primary); }
 .required { color: var(--color-red); }
 
 .spinner-wrapper {
   display: flex;
   align-items: center;
   gap: 10px;
-  border: 1px solid var(--color-border);
+  border: 1.5px solid var(--color-border);
   border-radius: var(--radius-field);
-  padding: 0 12px;
-  height: var(--field-height);
+  padding: 12px;
   background: var(--color-bg-card);
 }
 

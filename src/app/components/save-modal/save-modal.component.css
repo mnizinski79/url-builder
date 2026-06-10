@@ -56,10 +56,9 @@
 .optional { color: var(--color-text-muted); font-weight: 400; }
 
 .name-input {
-  height: var(--field-height);
-  border: 1px solid var(--color-border);
+  border: 1.5px solid var(--color-border);
   border-radius: var(--radius-field);
-  padding: 0 12px;
+  padding: 12px;
   font-size: 14px;
   outline: none;
   transition: border-color var(--transition-base), box-shadow var(--transition-base);
@@ -84,7 +83,7 @@
   padding: 0 20px;
   height: 38px;
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-field);
+  border-radius: var(--radius-button);
   font-size: 14px;
   color: var(--color-text-primary);
   background: white;
@@ -95,7 +94,7 @@
   padding: 0 24px;
   height: 38px;
   border: none;
-  border-radius: var(--radius-field);
+  border-radius: var(--radius-button);
   font-size: 14px;
   font-weight: 500;
   color: white;

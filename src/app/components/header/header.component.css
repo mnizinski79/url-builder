@@ -31,7 +31,7 @@
 
 .nav-btn {
   padding: 8px 12px;
-  border-radius: 8px;
+  border-radius: var(--radius-button);
   font-size: 13px;
   font-weight: 500;
   color: var(--color-text-on-dark);

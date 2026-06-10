@@ -7,14 +7,13 @@
   gap: 4px;
 }
 
-.field-label { font-size: 12px; font-weight: 500; color: var(--color-text-primary); }
+.field-label { font-size: 13px; font-weight: 500; color: var(--color-text-primary); }
 .required { color: var(--color-red); }
 
 .field-input {
-  height: var(--field-height);
-  border: 1px solid var(--color-border);
+  border: 1.5px solid var(--color-border);
   border-radius: var(--radius-field);
-  padding: 0 12px;
+  padding: 12px;
   font-size: 14px;
   color: var(--color-text-primary);
   background: var(--color-bg-card);

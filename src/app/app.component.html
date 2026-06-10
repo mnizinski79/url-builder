@@ -1,27 +1,36 @@
 <div class="app-shell">
-  <app-header
-    (openSaved)="openSaved()"
-    (openHistory)="openHistory()"
-  ></app-header>
-
-  <app-tab-bar
-    [activeTab]="activeTab"
-    (tabChange)="onTabChange($event)"
-  ></app-tab-bar>
-
-  <app-url-bar
-    [fullUrl]="currentUrl"
-    (urlCopied)="onCopy()"
-  ></app-url-bar>
-
   <main class="main-scroll">
+    <app-header
+      (openSaved)="openSaved()"
+      (openHistory)="openHistory()"
+    ></app-header>
+
+    <app-tab-bar
+      [activeTab]="activeTab"
+      (tabChange)="onTabChange($event)"
+    ></app-tab-bar>
+
+    <app-url-bar
+      [fullUrl]="currentUrl"
+      (urlCopied)="onCopy()"
+    ></app-url-bar>
+
+    <div class="url-bar-overlap-strip"></div>
+
     <app-form-container
       [activeTab]="activeTab"
       (formChanged)="onFormChanged()"
     ></app-form-container>
 
     <div class="save-action-bar">
-      <button type="button" class="btn-save-url" (click)="openSaveModal()">Save URL</button>
+      <button type="button" class="btn-save-url" (click)="openSaveModal()">
+        <ph-icon name="check" [size]="16"></ph-icon>
+        Save URL
+      </button>
+      <button type="button" class="btn-clear-form" (click)="clearForm()">
+        <ph-icon name="x" [size]="16"></ph-icon>
+        Clear Form
+      </button>
     </div>
   </main>
 

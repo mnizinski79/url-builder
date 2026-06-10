@@ -8,6 +8,7 @@ import { PhIconComponent } from '../ph-icon/ph-icon.component';
   imports: [CommonModule, PhIconComponent],
   templateUrl: './collapsible-section.component.html',
   styleUrls: ['./collapsible-section.component.css'],
+  host: { '[attr.title]': 'null' },
 })
 export class CollapsibleSectionComponent {
   @Input() title = '';

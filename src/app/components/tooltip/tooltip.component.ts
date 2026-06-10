@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -11,10 +11,24 @@ import { CommonModule } from '@angular/common';
 export class TooltipComponent {
   @Input() text = '';
   visible = false;
+  tooltipStyle: { [key: string]: string } = {};
   private showTimer: ReturnType<typeof setTimeout> | null = null;
 
+  constructor(private el: ElementRef) {}
+
   onMouseEnter(): void {
-    this.showTimer = setTimeout(() => (this.visible = true), 200);
+    const trigger = this.el.nativeElement.querySelector(
+      '.tooltip-trigger'
+    ) as HTMLElement;
+    if (trigger) {
+      const rect = trigger.getBoundingClientRect();
+      this.tooltipStyle = {
+        left: `${rect.left + rect.width / 2}px`,
+        top: `${rect.top - 10}px`,
+        transform: 'translate(-50%, -100%)',
+      };
+    }
+    this.showTimer = setTimeout(() => (this.visible = true), 150);
   }
 
   onMouseLeave(): void {

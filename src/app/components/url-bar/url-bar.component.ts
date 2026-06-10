@@ -25,6 +25,10 @@ export class UrlBarComponent {
   copied = false;
   showPopover = false;
 
+  get canShare(): boolean {
+    return 'share' in navigator;
+  }
+
   async copy(): Promise<void> {
     await navigator.clipboard.writeText(this.fullUrlValue);
     this.copied = true;
@@ -38,5 +42,17 @@ export class UrlBarComponent {
 
   closePopover(): void {
     this.showPopover = false;
+  }
+
+  visit(): void {
+    window.open(this.fullUrlValue, '_blank', 'noopener,noreferrer');
+  }
+
+  async share(): Promise<void> {
+    try {
+      await navigator.share({ url: this.fullUrlValue, title: 'IHG URL' });
+    } catch {
+      // User cancelled or API unavailable — no-op
+    }
   }
 }
