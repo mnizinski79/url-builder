@@ -16,6 +16,19 @@
   padding: 16px;
 }
 
+/* Itinerary section: 6-column grid for mixed spans (matches Figma).
+   Row 1: Destination/City/Country each span 2 (equal thirds).
+   Row 2: Stay Dates span 3, Rooms span 1, Special Rate span 2. */
+.itinerary-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+  padding: 16px;
+}
+.itinerary-grid .col-1 { grid-column: span 1; }
+.itinerary-grid .col-2 { grid-column: span 2; }
+.itinerary-grid .col-3 { grid-column: span 3; }
+
 /* Row-based layout for sections that need mixed column counts */
 .form-section-body {
   display: flex;
@@ -40,4 +53,8 @@
   .form-grid { grid-template-columns: 1fr; }
   .form-row,
   .form-row--3col { grid-template-columns: 1fr; }
+  .itinerary-grid { grid-template-columns: 1fr; }
+  .itinerary-grid .col-1,
+  .itinerary-grid .col-2,
+  .itinerary-grid .col-3 { grid-column: auto; }
 }

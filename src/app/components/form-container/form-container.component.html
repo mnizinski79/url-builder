@@ -60,32 +60,37 @@
   <ng-container *ngIf="isSearch">
     <!-- Itinerary Details -->
     <app-collapsible-section title="Itinerary Details" subtitle="Destination, dates, and room count">
-      <div class="form-grid">
+      <div class="itinerary-grid">
         <app-text-field
+          class="col-2"
           label="Destination"
           placeholder="e.g. Atlanta"
           [control]="c['qDest']"
           tooltip="City or region name to pre-populate in the hotel search field."
         ></app-text-field>
         <app-text-field
+          class="col-2"
           label="City"
           placeholder="e.g. ATL"
           [control]="c['qCity']"
           tooltip="Specific city code used to narrow hotel search results."
         ></app-text-field>
         <app-select-field
+          class="col-2"
           label="Country"
           [options]="countryOptions"
           [control]="c['qCtry']"
           tooltip="Country filter applied to hotel search results."
         ></app-select-field>
         <app-date-range-field
+          class="col-3"
           label="Eligible Stay Dates"
           [checkInControl]="c['qChkIn']"
           [checkOutControl]="c['qChkOut']"
           tooltip="Check-in and check-out dates passed to the search (YYYY-MM-DD format)."
         ></app-date-range-field>
         <app-number-spinner-field
+          class="col-1"
           label="Rooms"
           [control]="c['qRms']"
           [min]="1"
@@ -93,6 +98,7 @@
           tooltip="Number of rooms required. Minimum value: 1."
         ></app-number-spinner-field>
         <app-select-field
+          class="col-2"
           label="Special Rate"
           [options]="specialRateOptions"
           [control]="c['qRateCode']"
