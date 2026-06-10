@@ -23,7 +23,8 @@
 
 .drp-trigger-icon {
   background: #e0e0e2;
-  padding: 10px;
+  align-self: stretch;
+  padding: 0 10px;
   display: flex;
   align-items: center;
   flex-shrink: 0;
@@ -31,8 +32,8 @@
 }
 
 .drp-field-text {
-  padding: 10px 12px;
-  font-size: 13px;
+  padding: 12px;
+  font-size: 14px;
   color: var(--color-text-primary);
   flex: 1;
   white-space: nowrap;
