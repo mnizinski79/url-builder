@@ -34,12 +34,19 @@ describe('DateRangePickerComponent', () => {
       expect(el.querySelector('.drp-divider')).toBeNull();
     });
 
-    it('the single month grid shows both prev and next nav buttons', () => {
+    it('the single month grid shows both nav buttons wired prev→goPrev, next→goNext', () => {
       component.singleMonth = true;
+      component.leftYear = 2026;
+      component.leftMonth = 5; // June
       fixture.detectChanges();
       const el = fixture.nativeElement as HTMLElement;
-      const navBtns = el.querySelectorAll('app-month-grid .drp-nav-btn');
+      const navBtns = el.querySelectorAll<HTMLButtonElement>('app-month-grid .drp-nav-btn');
       expect(navBtns.length).toBe(2);
+      // MonthGridComponent renders prev (‹) first, next (›) second.
+      navBtns[0].click(); // prev → goPrev → May
+      expect(component.leftMonth).toBe(4);
+      navBtns[1].click(); // next → goNext → June
+      expect(component.leftMonth).toBe(5);
     });
 
     it('goNext/goPrev still advance the visible month in single-month mode', () => {
