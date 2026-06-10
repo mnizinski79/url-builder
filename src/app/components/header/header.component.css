@@ -12,22 +12,10 @@
 
 .logo-area { display: flex; align-items: center; gap: 16px; }
 
-.ihg-logo { display: flex; align-items: center; gap: 6px; }
-
-.logo-text {
-  font-size: 28px;
-  font-weight: 800;
-  color: var(--color-text-on-dark);
-  letter-spacing: -1px;
-}
-
-.logo-sub {
-  font-size: 7px;
-  font-weight: 600;
-  color: var(--color-text-on-dark-muted);
-  line-height: 1.3;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+.ihg-logo {
+  height: 28px;
+  width: auto;
+  display: block;
 }
 
 .header-divider {
