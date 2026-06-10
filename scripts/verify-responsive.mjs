@@ -66,7 +66,7 @@ try {
   });
   log('menu sheet', sheet);
   check('sheet present', sheet.sheetPresent);
-  check('four items', sheet.items.length === 4 && sheet.items.join(',') === 'Saved,History,Field Guide,Templates');
+  check('four items', sheet.items.length === 4 && sheet.items.join(',') === 'Saved,History,Field guide,Templates');
   check('grab-handle present', sheet.handlePresent);
   check('sheet bottom-anchored', sheet.bottomAnchored === true);
   check('sheet full width', sheet.fullWidth === true);
@@ -111,7 +111,7 @@ try {
   });
   await new Promise((r) => setTimeout(r, 300));
   await page.evaluate(() => {
-    const h = [...document.querySelectorAll('.section-header')].find((x) => x.textContent.includes('Itinerary Details'));
+    const h = [...document.querySelectorAll('.section-header')].find((x) => x.textContent.includes('Itinerary details'));
     h.click();
   });
   await new Promise((r) => setTimeout(r, 500));
@@ -173,7 +173,7 @@ try {
   });
   await new Promise((r) => setTimeout(r, 300));
   await page2.evaluate(() => {
-    const h = [...document.querySelectorAll('.section-header')].find((x) => x.textContent.includes('Itinerary Details'));
+    const h = [...document.querySelectorAll('.section-header')].find((x) => x.textContent.includes('Itinerary details'));
     h.click();
   });
   await new Promise((r) => setTimeout(r, 500));

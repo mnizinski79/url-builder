@@ -1,6 +1,6 @@
 <div class="form-container">
   <!-- Core Environment Setup -->
-  <app-collapsible-section title="Core Environment Setup" subtitle="Brand, language, and tracking basics" [expanded]="true">
+  <app-collapsible-section title="Core environment setup" subtitle="Brand, language, and tracking basics" [expanded]="true">
     <div class="form-section-body">
       <!-- Row 1: Brand, Language (2 col) -->
       <div class="form-row">
@@ -26,13 +26,13 @@
           tooltip="Paid Media ID — 4-character code identifying the campaign traffic source."
         ></app-text-field>
         <app-text-field
-          label="Global Attribution (GLAT)"
+          label="Global attribution (GLAT)"
           placeholder="e.g. MCEN"
           [control]="c['glat']"
           tooltip="Global attribution tracking code, minimum 4 characters. Used for cross-channel attribution."
         ></app-text-field>
         <app-text-field
-          label="Rate Code"
+          label="Rate code"
           placeholder="e.g. 6CBARC"
           [control]="c['rateCode']"
           tooltip="Specific rate plan code to pre-select on the landing page."
@@ -41,13 +41,13 @@
       <!-- Row 3: Toggles (2 col) -->
       <div class="form-row">
         <app-toggle-field
-          label="Domain Persistence"
+          label="Domain persistence"
           description="Allow tracking cookies across IHG domains"
           [control]="c['domainPersistence']"
           tooltip="Allows tracking cookies to persist across IHG domains for consistent attribution."
         ></app-toggle-field>
         <app-toggle-field
-          label="China Domain"
+          label="China domain"
           description="Route traffic through China-specific domain"
           [control]="c['chinaDomain']"
           tooltip="Routes traffic through IHG's China-specific domain for GC market campaigns."
@@ -59,7 +59,7 @@
   <!-- Search-only sections -->
   <ng-container *ngIf="isSearch">
     <!-- Itinerary Details -->
-    <app-collapsible-section title="Itinerary Details" subtitle="Destination, dates, and room count">
+    <app-collapsible-section title="Itinerary details" subtitle="Destination, dates, and room count">
       <div class="itinerary-grid">
         <app-text-field
           class="col-2"
@@ -84,7 +84,7 @@
         ></app-select-field>
         <app-date-range-field
           class="col-3"
-          label="Eligible Stay Dates"
+          label="Eligible stay dates"
           [checkInControl]="c['qChkIn']"
           [checkOutControl]="c['qChkOut']"
           tooltip="Check-in and check-out dates passed to the search (YYYY-MM-DD format)."
@@ -99,7 +99,7 @@
         ></app-number-spinner-field>
         <app-select-field
           class="col-2"
-          label="Special Rate"
+          label="Special rate"
           [options]="specialRateOptions"
           [control]="c['qRateCode']"
           tooltip="Pre-selects a special rate category (e.g. AAA, Senior, Government) in search results."
@@ -108,16 +108,16 @@
     </app-collapsible-section>
 
     <!-- Rate Details -->
-    <app-collapsible-section title="Rate Details" subtitle="Corporate and promotional rates">
+    <app-collapsible-section title="Rate details" subtitle="Corporate and promotional rates">
       <div class="form-grid">
         <app-text-field
-          label="Corporate Account Number"
+          label="Corporate account number"
           placeholder="e.g. IHG123456"
           [control]="c['corpNum']"
           tooltip="Corporate account number used to surface negotiated rates."
         ></app-text-field>
         <app-text-field
-          label="Promo Code"
+          label="Promo code"
           placeholder="e.g. SUMMER25"
           [control]="c['promoCode']"
           tooltip="Promotional code that applies a discount or special rate to results."
@@ -126,16 +126,16 @@
     </app-collapsible-section>
 
     <!-- Sort & Filter -->
-    <app-collapsible-section title="Sort & Filter" subtitle="Control result ordering and hotel class">
+    <app-collapsible-section title="Sort & filter" subtitle="Control result ordering and hotel class">
       <div class="form-grid">
         <app-select-field
-          label="Sort By"
+          label="Sort by"
           [options]="sortOptions"
           [control]="c['qSort']"
           tooltip="Sets the default sort order for search results: Relevance, Price Low–High, Guest Rating."
         ></app-select-field>
         <app-select-field
-          label="Hotel Class"
+          label="Hotel class"
           [options]="hotelClassOptions"
           [control]="c['qRating']"
           tooltip="Filters search results by star rating (1–5 stars)."
@@ -168,10 +168,10 @@
     </app-collapsible-section>
 
     <!-- Deep Linking -->
-    <app-collapsible-section title="Deep Linking" subtitle="Channel-specific routing">
+    <app-collapsible-section title="Deep linking" subtitle="Channel-specific routing">
       <div class="form-grid">
         <app-text-field
-          label="Deep Link Path"
+          label="Deep link path"
           placeholder="e.g. /hotel/details"
           [control]="c['deepLink']"
           tooltip="Internal app path used for channel-specific deep link routing."

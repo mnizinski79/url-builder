@@ -54,7 +54,7 @@ export const LANGUAGE_OPTIONS: SelectOption[] = [
   { value: 'de-de', label: 'German' },
   { value: 'fr-fr', label: 'French' },
   { value: 'es-es', label: 'Spanish' },
-  { value: 'cn-zh', label: 'Chinese (Simplified)' },
+  { value: 'cn-zh', label: 'Chinese (simplified)' },
   { value: 'jp-ja', label: 'Japanese' },
 ];
 
@@ -70,11 +70,11 @@ export const LANGUAGE_MAP: Record<string, { regionCode: string; localeCode: stri
 
 export const BRAND_GROUPS: SelectGroup[] = [
   {
-    groupLabel: 'Master Brand',
-    options: [{ value: '6c', label: 'IHG (All Brands)' }],
+    groupLabel: 'Master brand',
+    options: [{ value: '6c', label: 'IHG (all brands)' }],
   },
   {
-    groupLabel: 'Luxury & Lifestyle',
+    groupLabel: 'Luxury & lifestyle',
     options: [
       { value: 'sx', label: 'Six Senses' },
       { value: 'rg', label: 'Regent' },
@@ -130,7 +130,7 @@ export const COUNTRY_OPTIONS: SelectOption[] = [
 
 export const SPECIAL_RATE_OPTIONS: SelectOption[] = [
   { value: 'aaa', label: 'AAA / CAA' },
-  { value: 'senior', label: 'Senior Discount' },
+  { value: 'senior', label: 'Senior discount' },
   { value: 'govt', label: 'Government' },
   { value: 'military', label: 'Military' },
   { value: 'corp', label: 'Corporate' },
@@ -138,23 +138,23 @@ export const SPECIAL_RATE_OPTIONS: SelectOption[] = [
 
 export const SORT_OPTIONS: SelectOption[] = [
   { value: 'relevance', label: 'Relevance' },
-  { value: 'price_asc', label: 'Price: Low to High' },
-  { value: 'price_desc', label: 'Price: High to Low' },
-  { value: 'guest_rating', label: 'Guest Rating' },
+  { value: 'price_asc', label: 'Price: low to high' },
+  { value: 'price_desc', label: 'Price: high to low' },
+  { value: 'guest_rating', label: 'Guest rating' },
 ];
 
 export const HOTEL_CLASS_OPTIONS: SelectOption[] = [
-  { value: '1', label: '1 Star' },
-  { value: '2', label: '2 Stars' },
-  { value: '3', label: '3 Stars' },
-  { value: '4', label: '4 Stars' },
-  { value: '5', label: '5 Stars' },
+  { value: '1', label: '1 star' },
+  { value: '2', label: '2 stars' },
+  { value: '3', label: '3 stars' },
+  { value: '4', label: '4 stars' },
+  { value: '5', label: '5 stars' },
 ];
 
 export const CHANNEL_OPTIONS: SelectOption[] = [
   { value: 'email', label: 'Email' },
-  { value: 'push', label: 'Push Notification' },
+  { value: 'push', label: 'Push notification' },
   { value: 'sms', label: 'SMS' },
-  { value: 'social', label: 'Social Media' },
-  { value: 'display', label: 'Display Ad' },
+  { value: 'social', label: 'Social media' },
+  { value: 'display', label: 'Display ad' },
 ];
