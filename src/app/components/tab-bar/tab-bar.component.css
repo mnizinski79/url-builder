@@ -24,7 +24,7 @@
   line-height: normal;
 }
 
-.tab:hover:not(.disabled) {
+.tab:hover:not(.disabled):not(.active) {
   background: #3a728e;
 }
 
