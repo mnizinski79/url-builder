@@ -26,7 +26,7 @@
 </header>
 
 <div class="menu-sheet-backdrop" *ngIf="menuOpen" (click)="closeMenu()">
-  <div class="menu-sheet" (click)="$event.stopPropagation()" role="dialog" aria-label="Menu">
+  <div class="menu-sheet" (click)="$event.stopPropagation()" role="dialog" aria-modal="true" aria-label="Menu">
     <div class="menu-sheet-handle"></div>
     <button type="button" class="menu-sheet-item" (click)="onSaved()">Saved</button>
     <button type="button" class="menu-sheet-item" (click)="onHistory()">History</button>

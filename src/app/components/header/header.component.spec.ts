@@ -76,4 +76,24 @@ describe('HeaderComponent', () => {
     expect(spy).toHaveBeenCalled();
     expect(component.menuOpen).toBeFalse();
   });
+
+  it('Field Guide and Templates items close the menu without emitting (placeholders)', () => {
+    const savedSpy = spyOn(component.openSaved, 'emit');
+    const historySpy = spyOn(component.openHistory, 'emit');
+    component.menuOpen = true;
+    fixture.detectChanges();
+    const items = (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLButtonElement>('.menu-sheet-item');
+
+    items[2].click(); // Field Guide
+    expect(component.menuOpen).toBeFalse();
+
+    component.menuOpen = true;
+    fixture.detectChanges();
+    const items2 = (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLButtonElement>('.menu-sheet-item');
+    items2[3].click(); // Templates
+    expect(component.menuOpen).toBeFalse();
+
+    expect(savedSpy).not.toHaveBeenCalled();
+    expect(historySpy).not.toHaveBeenCalled();
+  });
 });
