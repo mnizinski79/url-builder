@@ -1,6 +1,5 @@
 import {
   Component, Input, Output, EventEmitter, OnInit,
-  ElementRef, HostListener,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MonthGridComponent } from './month-grid/month-grid.component';
@@ -34,7 +33,7 @@ export class DateRangePickerComponent implements OnInit {
   get isConfirmed(): boolean { return this.phase === 'confirmed'; }
   get canApply(): boolean { return this.phase === 'confirmed'; }
 
-  constructor(private el: ElementRef) {}
+  constructor() {}
 
   ngOnInit(): void {
     const ref = this.startDate ?? new Date();
@@ -95,13 +94,6 @@ export class DateRangePickerComponent implements OnInit {
   onCancel(): void {
     this.hoverDate = null;
     this.cancel.emit();
-  }
-
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: MouseEvent): void {
-    if (!this.el.nativeElement.contains(event.target as Node)) {
-      this.onCancel(); // single cancel code path
-    }
   }
 
   private toMidnight(d: Date): number {

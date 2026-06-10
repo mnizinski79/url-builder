@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input } from '@angular/core';
+import { Component, ElementRef, HostListener, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { TooltipComponent } from '../../tooltip/tooltip.component';
@@ -47,6 +47,13 @@ export class DateRangeFieldComponent {
       weekday: 'short', month: 'short', day: 'numeric', year: 'numeric',
     };
     return `${start.toLocaleDateString('en-US', opts)} → ${end.toLocaleDateString('en-US', opts)}`;
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    if (this.isOpen && !this.el.nativeElement.contains(event.target as Node)) {
+      this.isOpen = false;
+    }
   }
 
   togglePicker(event: Event): void {
