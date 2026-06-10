@@ -6,10 +6,31 @@
       <span class="app-title">URL Builder</span>
     </div>
   </div>
+
   <nav class="header-nav">
     <button type="button" class="nav-btn" (click)="openSaved.emit()">Saved</button>
     <button type="button" class="nav-btn" (click)="openHistory.emit()">History</button>
     <button type="button" class="nav-btn">Field Guide</button>
     <button type="button" class="nav-btn">Templates</button>
   </nav>
+
+  <button
+    type="button"
+    class="header-hamburger"
+    (click)="toggleMenu()"
+    aria-label="Open menu"
+    [attr.aria-expanded]="menuOpen"
+  >
+    <ph-icon name="list" [size]="24"></ph-icon>
+  </button>
 </header>
+
+<div class="menu-sheet-backdrop" *ngIf="menuOpen" (click)="closeMenu()">
+  <div class="menu-sheet" (click)="$event.stopPropagation()" role="dialog" aria-label="Menu">
+    <div class="menu-sheet-handle"></div>
+    <button type="button" class="menu-sheet-item" (click)="onSaved()">Saved</button>
+    <button type="button" class="menu-sheet-item" (click)="onHistory()">History</button>
+    <button type="button" class="menu-sheet-item" (click)="closeMenu()">Field Guide</button>
+    <button type="button" class="menu-sheet-item" (click)="closeMenu()">Templates</button>
+  </div>
+</div>
