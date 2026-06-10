@@ -101,6 +101,26 @@ describe('Date range picker integration (full app)', () => {
       .toBe(before);
   });
 
+  it('shows the hover range preview while awaiting the end date', () => {
+    openPicker();
+    dayButtons()[10].click(); // start date selected -> awaiting end
+    fixture.detectChanges();
+
+    const target = dayButtons()[15];
+    target.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }));
+    fixture.detectChanges();
+
+    expect(target.classList.contains('hover-end'))
+      .withContext('hovered day should carry the hover-end class')
+      .toBeTrue();
+    expect(document.querySelectorAll('.drp-day.hover-range').length)
+      .withContext('days between start and hovered day should carry hover-range')
+      .toBeGreaterThan(0);
+    expect(document.querySelector('.nights-tip'))
+      .withContext('nights tooltip should render on the hovered day')
+      .not.toBeNull();
+  });
+
   it('completes the full select-range-and-apply flow', () => {
     openPicker();
     dayButtons()[14].click();
