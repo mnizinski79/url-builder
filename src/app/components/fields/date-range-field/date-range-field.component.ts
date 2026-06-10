@@ -64,7 +64,7 @@ export class DateRangeFieldComponent {
   togglePicker(event: Event): void {
     event.stopPropagation();
     if (!this.isOpen) {
-      this.isMobile = window.matchMedia('(max-width: 640px)').matches;
+      this.isMobile = window.matchMedia('(max-width: 768px)').matches;
       this.updatePickerPosition();
     }
     this.isOpen = !this.isOpen;
