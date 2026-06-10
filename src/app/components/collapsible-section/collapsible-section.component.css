@@ -2,7 +2,7 @@
   background: var(--color-bg-card);
   border: 1.5px solid var(--color-border);
   border-radius: var(--radius-card);
-  overflow: clip;
+  overflow: visible;
   margin-bottom: 12px;
 }
 
@@ -41,7 +41,7 @@
 
 .section-content {
   max-height: 0;
-  overflow: clip;
+  overflow: visible;
   transition: max-height 300ms ease;
   padding: 0;
 }
