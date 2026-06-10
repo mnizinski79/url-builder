@@ -38,16 +38,16 @@ export class MonthGridComponent implements OnInit, OnChanges {
 
   readonly DOW_LABELS = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
   dayCells: DayCell[] = [];
+  /** Week rows for role="row" wrappers. Stored (not a getter) and iterated
+   *  with trackBy so day buttons keep their DOM identity across re-renders:
+   *  a real mousedown/mouseup pair must land on the same element for the
+   *  browser to fire click on the button at all. */
+  weeks: DayCell[][] = [];
   monthTitle = '';
   nightsCount: number | null = null;
 
-  // Fix 3: chunk dayCells into week rows for role="row" wrappers
-  get weeks(): DayCell[][] {
-    const result: DayCell[][] = [];
-    for (let i = 0; i < this.dayCells.length; i += 7) {
-      result.push(this.dayCells.slice(i, i + 7));
-    }
-    return result;
+  trackByIndex(index: number): number {
+    return index;
   }
 
   ngOnInit(): void {
@@ -63,7 +63,16 @@ export class MonthGridComponent implements OnInit, OnChanges {
     this.monthTitle = new Date(this.year, this.month, 1)
       .toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
     this.dayCells = this.buildCells();
+    this.weeks = this.chunkIntoWeeks(this.dayCells);
     this.nightsCount = this.computeNights();
+  }
+
+  private chunkIntoWeeks(cells: DayCell[]): DayCell[][] {
+    const result: DayCell[][] = [];
+    for (let i = 0; i < cells.length; i += 7) {
+      result.push(cells.slice(i, i + 7));
+    }
+    return result;
   }
 
   private buildCells(): DayCell[] {

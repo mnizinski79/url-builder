@@ -82,6 +82,25 @@ describe('Date range picker integration (full app)', () => {
       .not.toBeNull();
   });
 
+  it('reuses day button DOM nodes across hover re-renders (required for real mouse clicks)', () => {
+    openPicker();
+    dayButtons()[14].click(); // select start -> phase becomes awaiting-end
+    fixture.detectChanges();
+
+    const before = dayButtons()[19];
+    // A real user hovers before clicking the end date; this updates hoverDate
+    before.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }));
+    fixture.detectChanges();
+    const after = dayButtons()[19];
+
+    // If the grid recreates its buttons on every change detection, a real
+    // mousedown/mouseup pair lands on two different nodes and the click
+    // event fires on the grid container instead of the button.
+    expect(after)
+      .withContext('day button must be the same DOM node after a hover-triggered re-render')
+      .toBe(before);
+  });
+
   it('completes the full select-range-and-apply flow', () => {
     openPicker();
     dayButtons()[14].click();

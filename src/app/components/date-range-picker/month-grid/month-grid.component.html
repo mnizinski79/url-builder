@@ -10,9 +10,9 @@
   <div class="drp-row" role="row">
     <span class="drp-dow" *ngFor="let d of DOW_LABELS" role="columnheader">{{ d }}</span>
   </div>
-  <div class="drp-row" role="row" *ngFor="let week of weeks">
+  <div class="drp-row" role="row" *ngFor="let week of weeks; trackBy: trackByIndex">
     <button
-      *ngFor="let cell of week"
+      *ngFor="let cell of week; trackBy: trackByIndex"
       class="drp-day"
       [class.empty]="cell.isEmpty"
       [class.start]="cell.isStart"
