@@ -1,0 +1,63 @@
+.drp-panel {
+  background: white;
+  border: 1.5px solid #e0e0e2;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  padding: 20px;
+  display: inline-block;
+  user-select: none;
+}
+
+.drp-months {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+}
+
+.drp-divider {
+  width: 1px;
+  background: #f0f0f0;
+  align-self: stretch;
+  margin: 0 20px;
+  flex-shrink: 0;
+}
+
+.drp-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  padding-top: 14px;
+  margin-top: 12px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.drp-btn-cancel,
+.drp-btn-apply {
+  border-radius: var(--radius-button);
+  font-size: 12px;
+  font-weight: 500;
+  font-family: var(--font-stack);
+  padding: 7px 16px;
+  cursor: pointer;
+  transition: opacity 150ms ease, background 150ms ease;
+}
+
+.drp-btn-cancel {
+  background: none;
+  border: 1px solid #e0e0e2;
+  color: #6b6b6c;
+}
+.drp-btn-cancel:hover { background: rgba(0, 0, 0, 0.04); }
+
+.drp-btn-apply {
+  background: #1f4456;
+  color: white;
+  border: none;
+}
+.drp-btn-apply:hover { opacity: 0.88; }
+.drp-btn-apply[aria-disabled='true'] {
+  opacity: 0.4;
+  cursor: default;
+  pointer-events: none;
+}
