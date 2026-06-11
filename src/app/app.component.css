@@ -51,7 +51,7 @@
 .btn-save-url {
   border: none;
   color: white;
-  background: var(--color-red);
+  background: var(--color-btn-primary);
 }
 
 .btn-save-url:hover { opacity: 0.88; }
