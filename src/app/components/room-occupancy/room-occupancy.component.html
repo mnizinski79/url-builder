@@ -1,0 +1,57 @@
+<div class="room-grid" *ngIf="roomCount > 0">
+  <div class="room-card" *ngFor="let room of rooms; let i = index">
+    <!-- Header: Room N + Remove -->
+    <div class="room-card__header">
+      <span class="room-card__title">Room {{ i + 1 }}</span>
+      <button
+        type="button"
+        class="room-card__remove"
+        (click)="removeRoom(i)"
+      >Remove</button>
+    </div>
+
+    <!-- Adults + Children steppers row -->
+    <div class="room-card__row">
+      <div class="room-card__stepper">
+        <span class="room-card__stepper-label">Adults:</span>
+        <span class="room-card__stepper-value">{{ room.adults }}</span>
+        <div class="room-card__stepper-arrows">
+          <button type="button" class="stepper-arrow" (click)="increment(i, 'adults')" [disabled]="room.adults >= 9" aria-label="Increase adults">
+            <svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 8L6 4L10 8" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+          </button>
+          <button type="button" class="stepper-arrow" (click)="decrement(i, 'adults')" [disabled]="room.adults <= 1" aria-label="Decrease adults">
+            <svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="room-card__stepper">
+        <span class="room-card__stepper-label">Children:</span>
+        <span class="room-card__stepper-value">{{ room.children }}</span>
+        <div class="room-card__stepper-arrows">
+          <button type="button" class="stepper-arrow" (click)="increment(i, 'children')" [disabled]="room.children >= 9" aria-label="Increase children">
+            <svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 8L6 4L10 8" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+          </button>
+          <button type="button" class="stepper-arrow" (click)="decrement(i, 'children')" [disabled]="room.children <= 0" aria-label="Decrease children">
+            <svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Child age rows -->
+    <div class="room-card__age-row" *ngFor="let age of room.childAges; let j = index">
+      <div class="room-card__stepper room-card__stepper--full">
+        <span class="room-card__stepper-label">Child {{ j + 1 }} age:</span>
+        <span class="room-card__stepper-value">{{ age }}</span>
+        <div class="room-card__stepper-arrows">
+          <button type="button" class="stepper-arrow" (click)="incrementAge(i, j)" [disabled]="age >= 17" aria-label="Increase age">
+            <svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 8L6 4L10 8" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+          </button>
+          <button type="button" class="stepper-arrow" (click)="decrementAge(i, j)" [disabled]="age <= 0" aria-label="Decrease age">
+            <svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

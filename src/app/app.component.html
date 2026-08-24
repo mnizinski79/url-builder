@@ -3,11 +3,14 @@
     <app-header
       (openSaved)="openSaved()"
       (openHistory)="openHistory()"
+      (openGuide)="openGuide()"
     ></app-header>
 
     <app-tab-bar
       [activeTab]="activeTab"
+      [showAdded]="showAdded"
       (tabChange)="onTabChange($event)"
+      (toggleAdded)="toggleAdded()"
     ></app-tab-bar>
 
     <app-url-bar
@@ -19,7 +22,9 @@
 
     <app-form-container
       [activeTab]="activeTab"
+      [showAdded]="showAdded"
       (formChanged)="onFormChanged()"
+      (roomConfigsChanged)="onRoomConfigsChanged($event)"
     ></app-form-container>
 
     <div class="save-action-bar">

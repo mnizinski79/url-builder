@@ -12,6 +12,7 @@ import { PhIconComponent } from '../ph-icon/ph-icon.component';
 export class HeaderComponent {
   @Output() openSaved = new EventEmitter<void>();
   @Output() openHistory = new EventEmitter<void>();
+  @Output() openGuide = new EventEmitter<void>();
 
   menuOpen = false;
 
@@ -31,5 +32,10 @@ export class HeaderComponent {
   onHistory(): void {
     this.menuOpen = false;
     this.openHistory.emit();
+  }
+
+  onGuide(): void {
+    this.menuOpen = false;
+    this.openGuide.emit();
   }
 }

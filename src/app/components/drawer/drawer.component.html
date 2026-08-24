@@ -1,5 +1,5 @@
 <div class="drawer-overlay" *ngIf="open" (click)="close()">
-  <aside class="drawer" (click)="$event.stopPropagation()">
+  <aside class="drawer" [class.drawer--wide]="activeTab === 'guide'" (click)="$event.stopPropagation()">
     <div class="drawer-header">
       <div class="drawer-tabs">
         <button
@@ -14,6 +14,12 @@
           [class.active]="activeTab === 'history'"
           (click)="activeTab = 'history'"
         >History</button>
+        <button
+          type="button"
+          class="drawer-tab"
+          [class.active]="activeTab === 'guide'"
+          (click)="activeTab = 'guide'"
+        >Field guide</button>
       </div>
       <button type="button" class="drawer-close" (click)="close()" aria-label="Close"><ph-icon name="x" [size]="18"></ph-icon></button>
     </div>
@@ -37,6 +43,25 @@
           (copyUrl)="close()"
           (deleteEntry)="deleteHistory($event)"
         ></app-saved-url-card>
+      </ng-container>
+
+      <ng-container *ngIf="activeTab === 'guide'">
+        <div class="guide-list">
+          <div class="guide-card" *ngFor="let field of fieldGuide" [class.guide-card--added]="field.added">
+            <div class="guide-card__header">
+              <span class="guide-card__label">{{ field.label }}</span>
+              <span class="guide-card__badge" *ngIf="field.added">added</span>
+            </div>
+            <div class="guide-card__param">
+              <span class="guide-card__param-label">Parameter:</span>
+              <code class="guide-card__param-value">{{ field.param }}</code>
+            </div>
+            <div class="guide-card__meta">
+              <span class="guide-card__visibility">{{ field.visibility }}</span>
+            </div>
+            <p class="guide-card__desc">{{ field.description }}</p>
+          </div>
+        </div>
       </ng-container>
     </div>
   </aside>

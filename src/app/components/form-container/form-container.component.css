@@ -28,6 +28,28 @@
 .itinerary-grid .col-1 { grid-column: span 1; }
 .itinerary-grid .col-2 { grid-column: span 2; }
 .itinerary-grid .col-3 { grid-column: span 3; }
+.itinerary-grid .col-4 { grid-column: span 4; }
+
+/* 2-column rows within itinerary: date field 50%, paired spinners 50% */
+.itinerary-row {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.itinerary-row__half {
+  min-width: 0;
+}
+
+.itinerary-row__pair {
+  display: flex;
+  gap: 16px;
+}
+
+.itinerary-row__pair > * {
+  flex: 1;
+}
 
 /* Row-based layout for sections that need mixed column counts */
 .form-section-body {
@@ -56,5 +78,8 @@
   .itinerary-grid { grid-template-columns: 1fr; }
   .itinerary-grid .col-1,
   .itinerary-grid .col-2,
-  .itinerary-grid .col-3 { grid-column: auto; }
+  .itinerary-grid .col-3,
+  .itinerary-grid .col-4 { grid-column: auto; }
+  .itinerary-row { grid-template-columns: 1fr; }
+  .itinerary-row__pair { flex-direction: column; }
 }

@@ -69,6 +69,98 @@
   color: var(--color-text-muted);
 }
 
+/* Field Guide */
+.drawer--wide {
+  width: 560px;
+}
+
+.guide-list {
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.guide-card {
+  background: #f8f9fa;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.guide-card--added {
+  border-left: 3px solid #6bbf6b;
+}
+
+.guide-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.guide-card__label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.guide-card__badge {
+  font-size: 10px;
+  font-weight: 500;
+  color: #4a8c4a;
+  background: #e8f5e8;
+  border: 1px solid #c8e6c8;
+  border-radius: 200px;
+  padding: 1px 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.guide-card__param {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.guide-card__param-label {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.guide-card__param-value {
+  font-size: 12px;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  color: var(--color-navy);
+  background: #eef2f5;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.guide-card__meta {
+  display: flex;
+  align-items: center;
+}
+
+.guide-card__visibility {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  background: #f0f0f0;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.guide-card__desc {
+  font-size: 13px;
+  color: var(--color-text-secondary, #5a6872);
+  line-height: 1.4;
+  margin: 0;
+}
+
 @media (max-width: 768px) {
   .drawer-overlay {
     justify-content: flex-start;

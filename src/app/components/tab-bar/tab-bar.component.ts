@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TabKey } from '../../models/url-builder.models';
 
 interface Tab {
-  key: TabKey | null;
+  key: TabKey;
   label: string;
   disabled: boolean;
 }
@@ -17,18 +17,24 @@ interface Tab {
 })
 export class TabBarComponent {
   @Input() activeTab: TabKey = 'home';
+  @Input() showAdded = true;
   @Output() tabChange = new EventEmitter<TabKey>();
+  @Output() toggleAdded = new EventEmitter<void>();
 
   tabs: Tab[] = [
     { key: 'home', label: 'Home', disabled: false },
     { key: 'search', label: 'Search', disabled: false },
-    { key: null, label: 'Hotel details', disabled: true },
-    { key: null, label: 'CRR', disabled: true },
+    { key: 'hd', label: 'Hotel details', disabled: false },
+    { key: 'rates', label: 'CRR', disabled: false },
   ];
 
   selectTab(tab: Tab): void {
-    if (!tab.disabled && tab.key) {
+    if (!tab.disabled) {
       this.tabChange.emit(tab.key);
     }
+  }
+
+  onToggleAdded(): void {
+    this.toggleAdded.emit();
   }
 }

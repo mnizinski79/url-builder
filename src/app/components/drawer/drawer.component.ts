@@ -2,10 +2,11 @@ import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core
 import { CommonModule } from '@angular/common';
 import { SavedUrl } from '../../models/url-builder.models';
 import { StorageService } from '../../services/storage.service';
+import { FIELD_GUIDE, FieldGuideEntry } from '../../models/field-guide.data';
 import { SavedUrlCardComponent } from '../saved-url-card/saved-url-card.component';
 import { PhIconComponent } from '../ph-icon/ph-icon.component';
 
-type DrawerTab = 'saved' | 'history';
+type DrawerTab = 'saved' | 'history' | 'guide';
 
 @Component({
   selector: 'app-drawer',
@@ -22,6 +23,7 @@ export class DrawerComponent implements OnChanges {
   activeTab: DrawerTab = 'saved';
   savedUrls: SavedUrl[] = [];
   history: SavedUrl[] = [];
+  fieldGuide: FieldGuideEntry[] = FIELD_GUIDE;
 
   constructor(private storage: StorageService) {}
 

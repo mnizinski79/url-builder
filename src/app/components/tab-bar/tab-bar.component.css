@@ -1,14 +1,17 @@
-.tab-bar-wrapper {
+:host {
+  display: block;
   background: var(--color-navy);
+}
+
+.tab-bar-wrapper {
   display: flex;
   align-items: flex-end;
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 32px;
 }
 
 .tab-bar {
-  max-width: 1040px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 0 32px;
   display: flex;
   gap: 4px;
 }
@@ -38,6 +41,57 @@
 .tab.disabled {
   opacity: 0.45;
   cursor: not-allowed;
+}
+
+/* Added fields toggle */
+.added-toggle {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  padding-bottom: 8px;
+}
+
+.added-toggle__label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.added-toggle__text {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-on-dark);
+  white-space: nowrap;
+}
+
+.added-toggle__switch {
+  position: relative;
+  width: 36px;
+  height: 20px;
+  background: #4a7a8f;
+  border-radius: 10px;
+  transition: background 0.2s;
+}
+
+.added-toggle__switch.on {
+  background: #6bbf6b;
+}
+
+.added-toggle__knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform 0.2s;
+}
+
+.added-toggle__switch.on .added-toggle__knob {
+  transform: translateX(16px);
 }
 
 @media (max-width: 768px) {

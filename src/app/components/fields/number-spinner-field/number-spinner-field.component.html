@@ -6,7 +6,7 @@
     <app-tooltip *ngIf="tooltip" [text]="tooltip"></app-tooltip>
   </div>
   <div class="spinner-wrapper">
-    <div class="spinner-icon-box">
+    <div class="spinner-icon-box" *ngIf="showIcon">
       <ph-icon name="bed" [size]="20"></ph-icon>
     </div>
     <input

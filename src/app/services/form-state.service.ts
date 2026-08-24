@@ -4,8 +4,14 @@ import { TabKey } from '../models/url-builder.models';
 
 const SHARED_FIELDS = [
   'brandCode', 'language', 'pmid', 'glat', 'rateCode',
-  'domainPersistence', 'chinaDomain',
+  'domainPersistence', 'chinaDomain', 'corpNum', 'groupCode',
 ] as const;
+
+/** "Added" fields that appear on all tabs when the toggle is on */
+const ADDED_FIELDS = {
+  utmCampaign: '', utmSource: '', utmMedium: '',
+  deepLink: '', channel: '',
+};
 
 @Injectable({ providedIn: 'root' })
 export class FormStateService {
@@ -15,6 +21,8 @@ export class FormStateService {
     this.forms = {
       home: this.buildHomeForm(),
       search: this.buildSearchForm(),
+      hd: this.buildHdForm(),
+      rates: this.buildRatesForm(),
     };
   }
 
@@ -22,12 +30,14 @@ export class FormStateService {
     return this.forms[tab];
   }
 
-  /** Copy shared field values from one tab's form into the other, without triggering valueChanges. */
+  /** Copy shared field values from one tab's form into another, without triggering valueChanges. */
   syncSharedFields(from: TabKey, to: TabKey): void {
     const source = this.forms[from].value;
     const patch: Record<string, unknown> = {};
     for (const field of SHARED_FIELDS) {
-      patch[field] = source[field];
+      if (source[field] !== undefined) {
+        patch[field] = source[field];
+      }
     }
     this.forms[to].patchValue(patch, { emitEvent: false });
   }
@@ -37,14 +47,33 @@ export class FormStateService {
   }
 
   private getDefaults(tab: TabKey) {
-    const shared = { brandCode: '', language: '', pmid: '', glat: '', rateCode: '', domainPersistence: false, chinaDomain: false };
+    const shared = {
+      brandCode: '', language: '', pmid: '', glat: '', rateCode: '',
+      domainPersistence: false, chinaDomain: false,
+      corpNum: '', groupCode: '',
+      ...ADDED_FIELDS,
+    };
     if (tab === 'home') return shared;
+    if (tab === 'hd') return {
+      ...shared,
+      qChkIn: '', qChkOut: '', qRms: 0,
+      hotelCode: '', contentTab: '',
+    };
+    if (tab === 'rates') return {
+      ...shared,
+      qChkIn: '', qChkOut: '',
+      eligibleStayStartDate: '', eligibleStayEndDate: '',
+      minBookingWindow: null, minNights: null,
+      qRms: 0, hotelCode: '',
+    };
+    // search
     return {
       ...shared,
       qDest: '', qCity: '', qCtry: '', qChkIn: '', qChkOut: '',
-      qRms: 1, qRateCode: '', corpNum: '', promoCode: '', qSort: '',
-      qRating: '', utmCampaign: '', utmSource: '', utmMedium: '',
-      deepLink: '', channel: '',
+      eligibleStayStartDate: '', eligibleStayEndDate: '',
+      minBookingWindow: null, minNights: null,
+      qRms: 0, qRateCode: '', promoCode: '',
+      hotelCode: '', contentTab: '', qSort: '',
     };
   }
 
@@ -52,6 +81,9 @@ export class FormStateService {
     return this.fb.group({
       brandCode: [''], language: [''], pmid: [''], glat: [''],
       rateCode: [''], domainPersistence: [false], chinaDomain: [false],
+      corpNum: [''], groupCode: [''],
+      utmCampaign: [''], utmSource: [''], utmMedium: [''],
+      deepLink: [''], channel: [''],
     });
   }
 
@@ -59,9 +91,39 @@ export class FormStateService {
     return this.fb.group({
       brandCode: [''], language: [''], pmid: [''], glat: [''],
       rateCode: [''], domainPersistence: [false], chinaDomain: [false],
+      corpNum: [''], groupCode: [''],
       qDest: [''], qCity: [''], qCtry: [''], qChkIn: [''], qChkOut: [''],
-      qRms: [1], qRateCode: [''], corpNum: [''], promoCode: [''], qSort: [''],
-      qRating: [''], utmCampaign: [''], utmSource: [''], utmMedium: [''],
+      eligibleStayStartDate: [''], eligibleStayEndDate: [''],
+      minBookingWindow: [null], minNights: [null],
+      qRms: [0], qRateCode: [''], promoCode: [''],
+      hotelCode: [''], contentTab: [''], qSort: [''],
+      utmCampaign: [''], utmSource: [''], utmMedium: [''],
+      deepLink: [''], channel: [''],
+    });
+  }
+
+  private buildHdForm(): FormGroup {
+    return this.fb.group({
+      brandCode: [''], language: [''], pmid: [''], glat: [''],
+      rateCode: [''], domainPersistence: [false], chinaDomain: [false],
+      corpNum: [''], groupCode: [''],
+      qChkIn: [''], qChkOut: [''], qRms: [0],
+      hotelCode: [''], contentTab: [''],
+      utmCampaign: [''], utmSource: [''], utmMedium: [''],
+      deepLink: [''], channel: [''],
+    });
+  }
+
+  private buildRatesForm(): FormGroup {
+    return this.fb.group({
+      brandCode: [''], language: [''], pmid: [''], glat: [''],
+      rateCode: [''], domainPersistence: [false], chinaDomain: [false],
+      corpNum: [''], groupCode: [''],
+      qChkIn: [''], qChkOut: [''],
+      eligibleStayStartDate: [''], eligibleStayEndDate: [''],
+      minBookingWindow: [null], minNights: [null],
+      qRms: [0], hotelCode: [''],
+      utmCampaign: [''], utmSource: [''], utmMedium: [''],
       deepLink: [''], channel: [''],
     });
   }

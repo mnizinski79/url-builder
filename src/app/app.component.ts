@@ -4,6 +4,7 @@ import { TabKey, SavedUrl } from './models/url-builder.models';
 import { FormStateService } from './services/form-state.service';
 import { UrlBuilderService } from './services/url-builder.service';
 import { StorageService } from './services/storage.service';
+import { RoomConfig } from './components/room-occupancy/room-occupancy.component';
 import { HeaderComponent } from './components/header/header.component';
 import { UrlBarComponent } from './components/url-bar/url-bar.component';
 import { TabBarComponent } from './components/tab-bar/tab-bar.component';
@@ -32,8 +33,10 @@ export class AppComponent implements OnInit {
   activeTab: TabKey = 'home';
   currentUrl = '';
   showSaveModal = false;
+  showAdded = false;
   drawerOpen = false;
-  drawerTab: 'saved' | 'history' = 'saved';
+  drawerTab: 'saved' | 'history' | 'guide' = 'saved';
+  roomConfigs: RoomConfig[] = [];
 
   constructor(
     private formState: FormStateService,
@@ -55,9 +58,14 @@ export class AppComponent implements OnInit {
     this.rebuildUrl();
   }
 
+  onRoomConfigsChanged(configs: RoomConfig[]): void {
+    this.roomConfigs = configs;
+    this.rebuildUrl();
+  }
+
   rebuildUrl(): void {
     const values = this.formState.getForm(this.activeTab).value;
-    this.currentUrl = this.urlBuilder.buildUrl(this.activeTab, values);
+    this.currentUrl = this.urlBuilder.buildUrl(this.activeTab, values, this.roomConfigs);
   }
 
   onCopy(): void {
@@ -112,7 +120,16 @@ export class AppComponent implements OnInit {
     this.drawerOpen = true;
   }
 
+  openGuide(): void {
+    this.drawerTab = 'guide';
+    this.drawerOpen = true;
+  }
+
   closeDrawer(): void {
     this.drawerOpen = false;
+  }
+
+  toggleAdded(): void {
+    this.showAdded = !this.showAdded;
   }
 }

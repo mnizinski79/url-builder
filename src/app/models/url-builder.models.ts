@@ -1,4 +1,4 @@
-export type TabKey = 'home' | 'search';
+export type TabKey = 'home' | 'search' | 'hd' | 'rates';
 
 export interface SavedUrl {
   id: string;
@@ -27,6 +27,8 @@ export interface HomeFormValues {
   rateCode: string;
   domainPersistence: boolean;
   chinaDomain: boolean;
+  corpNum: string;
+  groupCode: string;
 }
 
 export interface SearchFormValues extends HomeFormValues {
@@ -35,12 +37,16 @@ export interface SearchFormValues extends HomeFormValues {
   qCtry: string;
   qChkIn: string;
   qChkOut: string;
+  eligibleStayStartDate: string;
+  eligibleStayEndDate: string;
+  minBookingWindow: number | null;
+  minNights: number | null;
   qRms: number;
   qRateCode: string;
-  corpNum: string;
   promoCode: string;
+  hotelCode: string;
+  contentTab: string;
   qSort: string;
-  qRating: string;
   utmCampaign: string;
   utmSource: string;
   utmMedium: string;
@@ -48,69 +54,136 @@ export interface SearchFormValues extends HomeFormValues {
   channel: string;
 }
 
+export interface HdFormValues extends HomeFormValues {
+  qChkIn: string;
+  qChkOut: string;
+  qRms: number;
+  hotelCode: string;
+  contentTab: string;
+}
+
+export interface RatesFormValues extends HomeFormValues {
+  qChkIn: string;
+  qChkOut: string;
+  eligibleStayStartDate: string;
+  eligibleStayEndDate: string;
+  minBookingWindow: number | null;
+  minNights: number | null;
+  qRms: number;
+  hotelCode: string;
+}
+
 export const LANGUAGE_OPTIONS: SelectOption[] = [
-  { value: 'us-en', label: 'US English' },
-  { value: 'gb-en', label: 'UK English' },
-  { value: 'de-de', label: 'German' },
-  { value: 'fr-fr', label: 'French' },
-  { value: 'es-es', label: 'Spanish' },
-  { value: 'cn-zh', label: 'Chinese (simplified)' },
-  { value: 'jp-ja', label: 'Japanese' },
+  { value: 'ar', label: 'Arabic' },
+  { value: 'de', label: 'German' },
+  { value: 'gb', label: 'Queens English' },
+  { value: 'en', label: 'US English' },
+  { value: 'es-eu', label: 'Castilian Spanish' },
+  { value: 'es-la', label: 'Spanish Latin America' },
+  { value: 'fr', label: 'French' },
+  { value: 'id', label: 'Indonesian' },
+  { value: 'it', label: 'Italian' },
+  { value: 'ja', label: 'Japanese' },
+  { value: 'ko', label: 'Korean' },
+  { value: 'nl', label: 'Dutch' },
+  { value: 'pl', label: 'Polish' },
+  { value: 'pt-br', label: 'Brazilian Portuguese' },
+  { value: 'pt-pt', label: 'Portugal Portuguese' },
+  { value: 'ru', label: 'Russian' },
+  { value: 'th', label: 'Thai' },
+  { value: 'tr', label: 'Turkish' },
+  { value: 'vi', label: 'Vietnamese' },
+  { value: 'cn', label: 'Simplified Chinese' },
+  { value: 'tw', label: 'Traditional Chinese' },
 ];
 
 export const LANGUAGE_MAP: Record<string, { regionCode: string; localeCode: string }> = {
-  'us-en': { regionCode: 'us', localeCode: 'en' },
-  'gb-en': { regionCode: 'gb', localeCode: 'en' },
-  'de-de': { regionCode: 'de', localeCode: 'de' },
-  'fr-fr': { regionCode: 'fr', localeCode: 'fr' },
-  'es-es': { regionCode: 'es', localeCode: 'es' },
-  'cn-zh': { regionCode: 'cn', localeCode: 'zh' },
-  'jp-ja': { regionCode: 'jp', localeCode: 'ja' },
+  'ar': { regionCode: '2', localeCode: 'ar' },
+  'de': { regionCode: '6', localeCode: 'de' },
+  'gb': { regionCode: '3', localeCode: 'gb' },
+  'en': { regionCode: '1', localeCode: 'en' },
+  'es-eu': { regionCode: '6', localeCode: 'es' },
+  'es-la': { regionCode: '1', localeCode: 'es' },
+  'fr': { regionCode: '6', localeCode: 'fr' },
+  'id': { regionCode: '2', localeCode: 'id' },
+  'it': { regionCode: '6', localeCode: 'it' },
+  'ja': { regionCode: '2', localeCode: 'ja' },
+  'ko': { regionCode: '2', localeCode: 'ko' },
+  'nl': { regionCode: '6', localeCode: 'nl' },
+  'pl': { regionCode: '6', localeCode: 'pl' },
+  'pt-br': { regionCode: '1', localeCode: 'pt' },
+  'pt-pt': { regionCode: '6', localeCode: 'pt' },
+  'ru': { regionCode: '6', localeCode: 'ru' },
+  'th': { regionCode: '2', localeCode: 'th' },
+  'tr': { regionCode: '2', localeCode: 'tr' },
+  'vi': { regionCode: '2', localeCode: 'vi' },
+  'cn': { regionCode: '2', localeCode: 'cn' },
+  'tw': { regionCode: '2', localeCode: 'tw' },
 };
 
 export const BRAND_GROUPS: SelectGroup[] = [
   {
     groupLabel: 'Master brand',
-    options: [{ value: '6c', label: 'IHG (all brands)' }],
+    options: [{ value: '6C', label: 'InterContinental Group (All Brands)' }],
   },
   {
     groupLabel: 'Luxury & lifestyle',
     options: [
-      { value: 'sx', label: 'Six Senses' },
-      { value: 'rg', label: 'Regent' },
-      { value: 'ic', label: 'InterContinental' },
-      { value: 'vn', label: 'Vignette Collection' },
-      { value: 'ki', label: 'Kimpton' },
-      { value: 'in', label: 'Hotel Indigo' },
-      { value: 'hl', label: 'HUALUXE' },
+      { value: 'SX', label: 'Six Senses' },
+      { value: 'RE', label: 'Regent Hotels' },
+      { value: 'IC', label: 'InterContinental' },
+      { value: 'LX', label: 'Vignette Collection' },
+      { value: 'FA', label: 'Noted Collection' },
+      { value: 'KI', label: 'Kimpton' },
+      { value: 'KD', label: 'Kimpton Club' },
+      { value: 'IN', label: 'Hotel Indigo' },
+      { value: 'UL', label: 'HUALUXE' },
     ],
   },
   {
     groupLabel: 'Premium',
     options: [
-      { value: 'cp', label: 'Crowne Plaza' },
-      { value: 'ev', label: 'EVEN Hotels' },
-      { value: 'vc', label: 'voco' },
-      { value: 'rb', label: 'Ruby' },
+      { value: 'CP', label: 'Crowne Plaza' },
+      { value: 'VN', label: 'EVEN Hotels' },
+      { value: 'vx', label: 'Voco' },
+      { value: 'GE', label: 'Ruby' },
+      { value: 'NU', label: 'Holidayinn the niu' },
     ],
   },
   {
     groupLabel: 'Essentials',
     options: [
-      { value: 'hi', label: 'Holiday Inn' },
-      { value: 'ex', label: 'Holiday Inn Express' },
-      { value: 'hr', label: 'Holiday Inn Resort' },
-      { value: 'hv', label: 'Holiday Inn Club Vacations' },
-      { value: 'gn', label: 'Garner' },
-      { value: 'av', label: 'avid hotels' },
+      { value: 'HI', label: 'Holiday Inn' },
+      { value: 'EX', label: 'Holiday Inn Express' },
+      { value: 'RS', label: 'Holiday Inn Resort' },
+      { value: 'CV', label: 'Holiday Inn Club Vacations' },
+      { value: 'RN', label: 'Garner' },
+      { value: 'va', label: 'Avid Hotels' },
+      { value: 'ND', label: 'ND Brand' },
     ],
   },
   {
     groupLabel: 'Suites',
     options: [
-      { value: 'cw', label: 'Candlewood Suites' },
-      { value: 'si', label: 'Staybridge Suites' },
-      { value: 'as', label: 'Atwell Suites' },
+      { value: 'CW', label: 'Candlewood Suites' },
+      { value: 'SB', label: 'Staybridge Suites' },
+      { value: 'WE', label: 'Atwell Suites' },
+    ],
+  },
+  {
+    groupLabel: 'Iberostar',
+    options: [
+      { value: 'SN', label: 'Iberostar' },
+      { value: 'IB', label: 'Iberostar Beachfront Resorts' },
+      { value: 'GR', label: 'Iberostar Grand' },
+      { value: 'SE', label: 'Iberostar Selection' },
+      { value: 'CO', label: 'Iberostar Coral' },
+    ],
+  },
+  {
+    groupLabel: 'Other',
+    options: [
+      { value: 'MA', label: 'Army Hotels' },
     ],
   },
 ];
@@ -157,4 +230,9 @@ export const CHANNEL_OPTIONS: SelectOption[] = [
   { value: 'sms', label: 'SMS' },
   { value: 'social', label: 'Social media' },
   { value: 'display', label: 'Display ad' },
+];
+
+export const CONTENT_TAB_OPTIONS: SelectOption[] = [
+  { value: 'hd', label: 'Hotel Detail' },
+  { value: 'amenities', label: 'Amenities' },
 ];

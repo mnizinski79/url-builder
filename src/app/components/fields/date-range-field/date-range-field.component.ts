@@ -22,7 +22,7 @@ export class DateRangeFieldComponent {
   isOpen = false;
   isMobile = false;
   pickerTop = 0;
-  pickerRight = 0;
+  pickerLeft = 0;
 
   constructor(private el: ElementRef) {}
 
@@ -65,17 +65,50 @@ export class DateRangeFieldComponent {
     event.stopPropagation();
     if (!this.isOpen) {
       this.isMobile = window.matchMedia('(max-width: 768px)').matches;
-      this.updatePickerPosition();
     }
     this.isOpen = !this.isOpen;
+    if (this.isOpen && !this.isMobile) {
+      // Wait a tick for the picker to render, then position it
+      setTimeout(() => this.updatePickerPosition(), 0);
+    }
   }
 
   private updatePickerPosition(): void {
     const trigger = this.el.nativeElement.querySelector('.drp-trigger');
-    if (!trigger) return;
-    const rect = (trigger as HTMLElement).getBoundingClientRect();
-    this.pickerTop = rect.bottom + 4;
-    this.pickerRight = window.innerWidth - rect.right;
+    const picker = this.el.nativeElement.querySelector('.drp-picker-wrap');
+    if (!trigger || !picker) return;
+
+    const triggerRect = (trigger as HTMLElement).getBoundingClientRect();
+    const pickerRect = (picker as HTMLElement).getBoundingClientRect();
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+
+    // Default: position below the trigger, aligned to its left edge
+    let top = triggerRect.bottom + 4;
+    let left = triggerRect.left;
+
+    // If picker overflows the bottom, position it above the trigger
+    if (top + pickerRect.height > viewportHeight) {
+      top = triggerRect.top - pickerRect.height - 4;
+    }
+
+    // If it still goes above the viewport, just pin to top
+    if (top < 0) {
+      top = 8;
+    }
+
+    // If picker overflows the right edge, shift left
+    if (left + pickerRect.width > viewportWidth) {
+      left = viewportWidth - pickerRect.width - 8;
+    }
+
+    // If it goes past the left edge, pin to left
+    if (left < 0) {
+      left = 8;
+    }
+
+    this.pickerTop = top;
+    this.pickerLeft = left;
   }
 
   onTriggerKeydown(event: KeyboardEvent): void {

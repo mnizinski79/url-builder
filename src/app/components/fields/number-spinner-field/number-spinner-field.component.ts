@@ -18,6 +18,7 @@ export class NumberSpinnerFieldComponent {
   @Input() min = 1;
   @Input() max = 9;
   @Input() control!: FormControl;
+  @Input() showIcon = true;
 
   /** Current value coerced to a number; empty/invalid resolves to `min`. */
   get current(): number {
