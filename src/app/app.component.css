@@ -22,7 +22,7 @@
 
 .save-action-bar {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   gap: 10px;
   padding: 0 32px 24px;
@@ -30,6 +30,56 @@
   margin: 0 auto;
   width: 100%;
   box-sizing: border-box;
+}
+
+.save-action-bar__buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Added fields toggle */
+.added-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.added-toggle__text {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+}
+
+.added-toggle__switch {
+  position: relative;
+  width: 36px;
+  height: 20px;
+  background: #ccc;
+  border-radius: 10px;
+  transition: background 0.2s;
+}
+
+.added-toggle__switch.on {
+  background: #6bbf6b;
+}
+
+.added-toggle__knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform 0.2s;
+}
+
+.added-toggle__switch.on .added-toggle__knob {
+  transform: translateX(16px);
 }
 
 .btn-save-url,

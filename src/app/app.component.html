@@ -8,9 +8,7 @@
 
     <app-tab-bar
       [activeTab]="activeTab"
-      [showAdded]="showAdded"
       (tabChange)="onTabChange($event)"
-      (toggleAdded)="toggleAdded()"
     ></app-tab-bar>
 
     <app-url-bar
@@ -28,14 +26,22 @@
     ></app-form-container>
 
     <div class="save-action-bar">
-      <button type="button" class="btn-save-url" (click)="openSaveModal()">
-        <ph-icon name="check" [size]="16"></ph-icon>
-        Save URL
-      </button>
-      <button type="button" class="btn-clear-form" (click)="clearForm()">
-        <ph-icon name="x" [size]="16"></ph-icon>
-        Clear form
-      </button>
+      <div class="added-toggle" (click)="toggleAdded()">
+        <span class="added-toggle__text">Added fields</span>
+        <span class="added-toggle__switch" [class.on]="showAdded">
+          <span class="added-toggle__knob"></span>
+        </span>
+      </div>
+      <div class="save-action-bar__buttons">
+        <button type="button" class="btn-save-url" (click)="openSaveModal()">
+          <ph-icon name="check" [size]="16"></ph-icon>
+          Save URL
+        </button>
+        <button type="button" class="btn-clear-form" (click)="clearForm()">
+          <ph-icon name="x" [size]="16"></ph-icon>
+          Clear form
+        </button>
+      </div>
     </div>
   </main>
 

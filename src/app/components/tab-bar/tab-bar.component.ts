@@ -17,9 +17,7 @@ interface Tab {
 })
 export class TabBarComponent {
   @Input() activeTab: TabKey = 'home';
-  @Input() showAdded = true;
   @Output() tabChange = new EventEmitter<TabKey>();
-  @Output() toggleAdded = new EventEmitter<void>();
 
   tabs: Tab[] = [
     { key: 'home', label: 'Home', disabled: false },
@@ -32,9 +30,5 @@ export class TabBarComponent {
     if (!tab.disabled) {
       this.tabChange.emit(tab.key);
     }
-  }
-
-  onToggleAdded(): void {
-    this.toggleAdded.emit();
   }
 }
